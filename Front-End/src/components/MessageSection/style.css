@@ -1,0 +1,167 @@
+.MessageSectionHeader {
+  position: relative;
+  width: 100%;
+  min-height: 10%;
+  padding: 15px;
+  border-bottom: thin solid rgba(128, 128, 128, 0.328);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.MessageSectionHeaderDropDownBtn {
+  background: none;
+  border: none;
+  outline: none;
+  color: gray;
+  font-size: larger;
+  transition: all 500ms;
+  cursor: pointer;
+}
+.MessageSectionHeaderDropDownBtn:hover {
+  color: black;
+}
+
+.MessageSectionDropDownContent {
+  background: none;
+  border: none;
+  outline: none;
+  text-align: left;
+  font-size: medium;
+  width: 100%;
+  height: 30%;
+  padding-left: 15px;
+  line-height: 2rem;
+  color: black;
+  text-decoration: none;
+  transition: all 1s;
+}
+.MessageSectionDropDownContent:hover {
+  background: rgba(255, 255, 255, 0.248);
+  color: white;
+}
+
+.MessageSectionMain {
+  width: 100%;
+  height: 80%;
+  padding-left: 15px;
+}
+.MessageElementImage {
+  width: 50px;
+  margin: 25px 15px;
+  border-radius: 5px;
+  align-self: flex-start;
+}
+.MessageElementContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.MessageSenderNameAndDate {
+  width: 200px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.MessageDate {
+  color: gray;
+}
+.MessageTxt {
+  font-size: medium;
+}
+
+/********************/
+.MessageSectionFooter {
+  height: 20%;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-top: thin solid rgba(128, 128, 128, 0.328);
+}
+
+.MessageInputsBtn {
+  color: gray;
+  background: none;
+  border: none;
+  outline: none;
+  transition: all 500ms;
+}
+
+.MessageInputsBtn:hover {
+  color: rgb(41, 41, 41);
+}
+
+.MessageInput {
+  width: 80%;
+  height: 50%;
+  resize: none;
+  text-overflow: clip;
+  outline: none;
+  border: thin solid rgba(128, 128, 128, 0.328);
+}
+
+.MessageInput::-webkit-scrollbar {
+  display: none;
+}
+/*************************************************/
+.AccountSideBarContent {
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px) brightness(0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.AccountSideBarCloseBtn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: none;
+  outline: none;
+  border: none;
+  color: #1c0a20;
+  font-size: x-large;
+  transition: all 500ms;
+}
+.AccountSideBarCloseBtn:hover {
+  color: #42184b;
+}
+
+.AccountSideBarProfilePic {
+  width: 100%;
+  justify-self: flex-start;
+}
+
+.AccountSideBarStatusAndUploadImg {
+  max-width: 100%;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.AccountSideBarStatus {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.UploadFile::-webkit-file-upload-button {
+  display: none;
+}
+.UploadFile {
+  outline: none;
+  transition: all 500ms;
+  cursor: pointer;
+}
+.UploadFile:hover {
+  color: #42184b;
+}
+
+.SwitchButton {
+  width: 10px;
+  height: 10px;
+  border: thin solid gray;
+  border-radius: 100%;
+  background-color: white;
+}

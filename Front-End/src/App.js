@@ -1,43 +1,29 @@
 import { useState } from "react";
-import styled, { keyframes } from "styled-components";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
+import MessageSection from "./components/MessageSection/MessageSection";
+
 import SideBarContainer from "./components/SideBarContainer";
-
-const appear = keyframes`
-from {
-  opacity: 0;
-}
-to {
-opacity: 1;
-}
-`;
-
-const MessageSpace = styled.div`
-  flex-direction: column;
-  width: ${(props) => (props.isLogged ? "80vw" : "0")};
-  background-color: red;
-  transition: all 1s ease-in-out;
-  animation: ${appear} linear 1s;
-  /* display: ${(props) => (props.isLogged ? "flex" : "none")}; */
-`;
+import AccountSideBar from "./components/StyledComponents/AccountSideBar";
+import DropDown from "./components/StyledComponents/DropdownDiv";
+import MessageSpace from "./components/StyledComponents/MessageSpace";
 
 function App() {
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(true);
   return (
     <div className="App">
-      <button
-        style={{ position: "absolute", top: "20px" }}
-        onClick={() => setIsLogged(!isLogged)}
-      >
-        Click
-      </button>
-      <div className="Interface">
-        <SideBarContainer isLogged={isLogged} />
-        <MessageSpace isLogged={isLogged}>
-          <h1>Hello!!</h1>
-          <p>I'm here to demonstrate some animation</p>
-        </MessageSpace>
-      </div>
+      <Router>
+        <button
+          style={{ position: "absolute", right: "20px", zIndex: "1231351" }}
+          onClick={() => setIsLogged(!isLogged)}
+        >
+          Click
+        </button>
+        <div className="Interface">
+          <SideBarContainer isLogged={isLogged} />
+          <MessageSection isLogged={isLogged} />
+        </div>
+      </Router>
     </div>
   );
 }

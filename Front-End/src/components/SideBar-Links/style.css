@@ -1,0 +1,124 @@
+.SideLinksContainer {
+  background: none;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: white;
+}
+.SideLinks-Section {
+  width: 100%;
+}
+.SectionTitle {
+  color: gray;
+}
+.SearchInput {
+  border: none;
+  background: rgba(255, 255, 255, 0.268);
+  width: 80%;
+  border-radius: 7px;
+  padding: 5px;
+  color: white;
+  outline: none;
+  margin-bottom: 20px;
+}
+.SearchInput::placeholder {
+  color: white;
+}
+
+/*****************************/
+.UserSection {
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.SideBarUserSectionGearBtn {
+  background: none;
+  border: none;
+  font-size: larger;
+  color: white;
+  outline: none;
+}
+.DropDownContainer {
+  position: relative;
+}
+.gear {
+  transition: all 500ms;
+}
+
+.gear:hover {
+  transform: rotate(0.5turn);
+}
+
+.DropDownItem {
+  width: 100%;
+  height: 30%;
+  padding-left: 15px;
+  line-height: 2rem;
+  color: white;
+  text-decoration: none;
+  transition: all 1s;
+}
+.DropDownItem:hover {
+  background-color: rgba(255, 255, 255, 0.248);
+  color: black;
+}
+
+/***********************************/
+
+.RoomSection {
+  overflow: hidden;
+  height: 36%;
+}
+.RoomsList {
+  list-style: none;
+}
+
+.RoomLink,
+.SideBarRoomsLink {
+  height: 30px;
+  width: 100%;
+  color: rgba(255, 255, 255, 0.268);
+  text-decoration: none;
+  text-align: left;
+  transition: all 500ms;
+}
+
+.RoomLink:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.556);
+}
+
+/********************************/
+
+.SideBarFriendElement {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  transition: all 500ms;
+}
+
+.SideBarFriendElement:hover {
+  background-color: rgba(255, 255, 255, 0.261);
+}
+.SideBarFriendImg {
+  margin: 10px;
+  width: 40px;
+  border-radius: 5px;
+}
+
+.Online,
+.Offline {
+  font-size: 10px;
+}
+
+.Online {
+  color: #00f600;
+}
+.Offline {
+  color: grey;
+}
