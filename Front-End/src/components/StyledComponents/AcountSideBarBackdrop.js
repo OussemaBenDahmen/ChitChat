@@ -8,7 +8,7 @@ const AccountSideBarBackDrop = styled.div`
   width: ${(props) => (props.isOpen ? "78.2vw" : "0")};
   background: none;
   backdrop-filter: ${(props) =>
-    props.isOpen ? "blur(1px) brightness(0.8)" : "blur(0)"};
+    props.isOpen ? "blur(1px) brightness(0.6)" : "blur(0)"};
   transition: all 1s;
 `;
 

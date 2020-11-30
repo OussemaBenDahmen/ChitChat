@@ -79,6 +79,8 @@
 }
 
 .MessageInputsBtn {
+  cursor: pointer;
+  font-size: large;
   color: gray;
   background: none;
   border: none;
@@ -115,6 +117,7 @@
 
 .AccountSideBarCloseBtn {
   position: absolute;
+  z-index: 1315;
   top: 0;
   left: 0;
   background: none;
@@ -123,45 +126,118 @@
   color: #1c0a20;
   font-size: x-large;
   transition: all 500ms;
+  cursor: pointer;
 }
 .AccountSideBarCloseBtn:hover {
-  color: #42184b;
+  color: white;
+  background-color: #42184b;
+  backdrop-filter: blur(100px);
 }
 
 .AccountSideBarProfilePic {
+  z-index: -1;
   width: 100%;
-  justify-self: flex-start;
+  position: absolute;
+  top: 0;
 }
 
 .AccountSideBarStatusAndUploadImg {
-  max-width: 100%;
+  position: absolute;
+  top: 40%;
+  width: 100%;
   padding: 0 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.UploadFile {
+  background: none;
+  border: none;
+  outline: none;
+  transition: all 500ms;
+  cursor: pointer;
+  color: #1c0a20;
+  font-size: x-large;
+}
+.UploadFile:hover {
+  color: white;
+  background-color: #42184b;
+  backdrop-filter: blur(100px);
 }
 .AccountSideBarStatus {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
-.UploadFile::-webkit-file-upload-button {
-  display: none;
-}
-.UploadFile {
-  outline: none;
-  transition: all 500ms;
-  cursor: pointer;
-}
-.UploadFile:hover {
-  color: #42184b;
-}
-
 .SwitchButton {
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   border: thin solid gray;
   border-radius: 100%;
   background-color: white;
+}
+
+.AccountInformation {
+  height: 50%;
+  width: 100%;
+  position: absolute;
+  left: 20px;
+  bottom: 0;
+}
+
+.AccountInformationEditBtn {
+  position: absolute;
+  right: 30px;
+  font-size: x-large;
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 500ms;
+}
+.AccountInformationEditBtn:hover {
+  color: #42184b;
+}
+
+.EditInput {
+  font-size: 1rem;
+  font-weight: bolder;
+  height: 1.5rem;
+  margin: 10px;
+  outline: none;
+  background: none;
+  border: none;
+  border-bottom: thin solid #42184b;
+  transition: all 500ms;
+}
+.EditInput:hover {
+  color: white;
+  background: #42184b77;
+}
+
+.AccountSideBarSaveBtn {
+  width: 150px;
+  height: 40px;
+  font-size: x-large;
+  background-color: #1d103d;
+  border: thin solid #1d103d;
+  color: white;
+  transition: all 500ms;
+}
+
+.AccountSideBarDisconnectBtn {
+  position: absolute;
+  bottom: 20px;
+  width: 150px;
+  height: 40px;
+  background-color: #1d103d;
+  border: thin solid #1d103d;
+  color: white;
+  transition: all 500ms;
+}
+
+.AccountSideBarDisconnectBtn:hover,
+.AccountSideBarSaveBtn:hover {
+  filter: brightness(0.8) invert(1);
 }

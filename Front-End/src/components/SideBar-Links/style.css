@@ -3,6 +3,7 @@
   width: 100%;
   height: 100%;
   padding: 15px;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -30,7 +31,7 @@
 
 /*****************************/
 .UserSection {
-  height: 10%;
+  height: 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -70,41 +71,54 @@
 
 /***********************************/
 
-.RoomSection {
-  overflow: hidden;
-  height: 36%;
+.RoomListScrollBar > div {
+  max-height: 150px !important;
 }
+
 .RoomsList {
   list-style: none;
 }
 
 .RoomLink,
 .SideBarRoomsLink {
+  line-height: 2rem;
   height: 30px;
   width: 100%;
-  color: rgba(255, 255, 255, 0.268);
+  color: rgba(255, 255, 255, 0.568);
   text-decoration: none;
   text-align: left;
   transition: all 500ms;
 }
 
 .RoomLink:hover {
-  color: white;
-  background-color: rgba(255, 255, 255, 0.556);
+  background-color: rgba(255, 255, 255, 0.256);
 }
 
+.RoomLink:hover .SideBarRoomsLink {
+  color: white;
+}
 /********************************/
+
+.FriendListSection {
+  height: 300px;
+}
 
 .SideBarFriendElement {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   transition: all 500ms;
+  color: rgba(255, 255, 255, 0.568);
 }
 
 .SideBarFriendElement:hover {
   background-color: rgba(255, 255, 255, 0.261);
 }
+
+.SideBarFriendElement:hover h4 {
+  color: white;
+}
+
 .SideBarFriendImg {
   margin: 10px;
   width: 40px;

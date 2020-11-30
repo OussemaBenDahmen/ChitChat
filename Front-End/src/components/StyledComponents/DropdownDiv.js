@@ -5,7 +5,7 @@ const { default: styled } = require("styled-components");
 const DropDown = styled.div`
   z-index: 454;
   position: absolute;
-  top: 60px;
+  top: 50px;
   right: 15px;
   border-radius: 2px;
   background: rgba(135, 130, 140, 0.568);

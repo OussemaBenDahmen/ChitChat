@@ -6,7 +6,7 @@ const AccountSideBar = styled.div`
   z-index: 3333333;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   transition: all 500ms;
   background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPG69i_M4RUj0GeJZxdtYJHBBVCk34yUkfwQ&usqp=CAU")

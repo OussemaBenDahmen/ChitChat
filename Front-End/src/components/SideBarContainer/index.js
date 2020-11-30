@@ -10,7 +10,15 @@ function SideBarContainer(props) {
     <Div isLogged={props.isLogged}>
       <div className="SideBar-SubContainer">
         {props.isLogged ? (
-          <Loader component={<SideLinks />} />
+          <Loader
+            component={
+              <SideLinks
+                setIsLogged={props.setIsLogged}
+                isAccountSectionOpen={props.isAccountSectionOpen}
+                setAccountSectionOpen={props.setAccountSectionOpen}
+              />
+            }
+          />
         ) : (
           <SignUpAndSignIn />
         )}
