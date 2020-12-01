@@ -26,6 +26,7 @@
   border: none;
   outline: none;
   text-align: left;
+
   font-size: medium;
   width: 100%;
   height: 30%;
@@ -36,8 +37,9 @@
   transition: all 1s;
 }
 .MessageSectionDropDownContent:hover {
-  background: rgba(255, 255, 255, 0.248);
+  background: rgba(48, 17, 44, 0.748);
   color: white;
+  text-shadow: 5px 5px 5px black;
 }
 
 .MessageSectionMain {
@@ -217,7 +219,7 @@
 }
 
 .AccountSideBarSaveBtn {
-  width: 100px;
+  width: 150px;
   height: 40px;
   font-size: x-large;
   background-color: #1d103d;
@@ -225,19 +227,11 @@
   color: white;
   transition: all 500ms;
 }
-.AccountSideBarDeleteBtn {
-  width: 100px;
-  height: 40px;
-  font-size: x-large;
-  background-color: #3f0c24;
-  border: thin solid#2F1320;
-  color: white;
-  transition: all 500ms;
-}
+
 .AccountSideBarDisconnectBtn {
   position: absolute;
   bottom: 20px;
-  width: 100px;
+  width: 150px;
   height: 40px;
   background-color: #1d103d;
   border: thin solid #1d103d;
@@ -246,7 +240,6 @@
 }
 
 .AccountSideBarDisconnectBtn:hover,
-.AccountSideBarSaveBtn:hover,
-.AccountSideBarDeleteBtn:hover {
+.AccountSideBarSaveBtn:hover {
   filter: brightness(0.8) invert(1);
 }

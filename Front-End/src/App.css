@@ -12,3 +12,8 @@
   display: flex;
   justify-content: flex-start;
 }
+
+button {
+  cursor: pointer;
+  outline: none;
+}

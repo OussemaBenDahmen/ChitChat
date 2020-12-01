@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import AccountSideBarComponent from "../AccountSideBarComponent/AccountSideBarComponent";
+import MessageSectionFooter from "../MessageSection/Footer/MessageSectionFooter";
+import MessageSectionMain from "../MessageSection/Main/MessageSectionMain";
 import MessageSpace from "../StyledComponents/MessageSpace";
-import MessageSectionFooter from "./Footer/MessageSectionFooter";
-import MessageSectionHeader from "./Header/MessageSectionHeader";
-import MessageSectionMain from "./Main/MessageSectionMain";
+import IndividualChatSectionHeader from "./Header/IndividualChatSectionHeader";
 import "./style.css";
 
-function MessageSection(props) {
+function IndividualChatSection(props) {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
   return (
     <MessageSpace isLogged={props.isLogged}>
-      <MessageSectionHeader
+      <IndividualChatSectionHeader
         el={props.el}
         isDropDownOpen={isDropDownOpen}
         setIsDropDownOpen={setIsDropDownOpen}
@@ -28,4 +28,4 @@ function MessageSection(props) {
   );
 }
 
-export default MessageSection;
+export default IndividualChatSection;

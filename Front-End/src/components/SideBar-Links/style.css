@@ -56,9 +56,12 @@
 }
 
 .DropDownItem {
+  background: none;
+  border: none;
   width: 100%;
   height: 30%;
   padding-left: 15px;
+  text-align: left;
   line-height: 2rem;
   color: white;
   text-decoration: none;
@@ -67,6 +70,7 @@
 .DropDownItem:hover {
   background-color: rgba(255, 255, 255, 0.248);
   color: black;
+  text-shadow: 5px 5px 5px;
 }
 
 /***********************************/
@@ -101,6 +105,9 @@
 
 .FriendListSection {
   height: 300px;
+}
+.FriendListLink {
+  text-decoration: none;
 }
 
 .SideBarFriendElement {

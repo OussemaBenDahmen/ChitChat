@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
-import AccountSideBar from "../../StyledComponents/AccountSideBar";
-import AccountSideBarBackDrop from "../../StyledComponents/AcountSideBarBackdrop";
-import StatusSwitch from "../../StyledComponents/StatusSwitch";
-
+import AccountSideBar from "../StyledComponents/AccountSideBar";
+import AccountSideBarBackDrop from "../StyledComponents/AcountSideBarBackdrop";
+import StatusSwitch from "../StyledComponents/StatusSwitch";
+import "../MessageSection/style.css";
 function AccountSideBarComponent(props) {
   const [isOnline, setIsOnline] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -57,7 +57,7 @@ function AccountSideBarComponent(props) {
             {props.isAccountSectionOpen ? (
               <button
                 className="AccountInformationEditBtn"
-                onClick={() => setIsEditing(true)}
+                onClick={() => setIsEditing(!isEditing)}
               >
                 <i className="fa fa-edit"></i>
               </button>
@@ -81,6 +81,12 @@ function AccountSideBarComponent(props) {
                     onClick={() => setIsEditing(false)}
                   >
                     <i className="fa fa-save"></i>
+                  </button>
+                  <button
+                    className="AccountSideBarDeleteBtn"
+                    onClick={() => setIsEditing(false)}
+                  >
+                    <i className="fa fa-trash"></i>
                   </button>
                 </div>
               </div>

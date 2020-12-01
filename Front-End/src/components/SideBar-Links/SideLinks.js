@@ -22,7 +22,7 @@ function SideLinks(props) {
             <i className="fa fa-cog gear"></i>
           </button>
           <DropDown isOpen={isOpen}>
-            <Link
+            <button
               className="DropDownItem"
               onClick={() => {
                 props.setAccountSectionOpen(!props.AccountSectionOpen);
@@ -30,14 +30,14 @@ function SideLinks(props) {
               }}
             >
               Account
-            </Link>
-            <Link className="DropDownItem">Status</Link>
-            <Link
+            </button>
+            <button className="DropDownItem">Status</button>
+            <button
               className="DropDownItem"
               onClick={() => props.setIsLogged(false)}
             >
               Disconnect
-            </Link>
+            </button>
           </DropDown>
         </div>
       </div>
@@ -58,7 +58,13 @@ function SideLinks(props) {
           <div className="RoomsList">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((el, i) => (
               <li className="RoomLink" key={i}>
-                <Link className="SideBarRoomsLink"> # Room {el}</Link>
+                <Link
+                  className="SideBarRoomsLink"
+                  to={`/Room_id=${el}`}
+                  key={i}
+                >
+                  # Room {el}
+                </Link>
               </li>
             ))}
           </div>
@@ -73,8 +79,10 @@ function SideLinks(props) {
           hideTracksWhenNotNeeded
           className="FriendsListScrollBar"
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((el) => (
-            <FriendListElement el={el} />
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((el, i) => (
+            <Link className="FriendListLink" to={`/Chat_id=${el}`} key={i}>
+              <FriendListElement el={el} />
+            </Link>
           ))}
         </Scrollbars>
       </div>

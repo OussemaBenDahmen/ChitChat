@@ -50,8 +50,19 @@
   transition: all 500ms;
 }
 
+.DeleteBtn {
+  width: 150px;
+  height: 60px;
+  margin-bottom: 20px;
+  background-color: #5e0808;
+  border: thin solid#2f1313;
+  color: white;
+  transition: all 500ms;
+}
+
 .CreateRoomBtn:hover,
-.CancelBtn:hover {
+.CancelBtn:hover,
+.DeleteBtn:hover {
   filter: brightness(0.8) invert(1);
   border: thin solid white;
 }
