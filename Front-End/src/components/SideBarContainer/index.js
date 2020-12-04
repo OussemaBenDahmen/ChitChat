@@ -1,26 +1,27 @@
 import React from "react";
-import styled from "styled-components";
+import Loader from "../Loader/Loader";
+import SideLinks from "../SideBar-Links/SideLinks";
+import SignUpAndSignIn from "../SignUp-SignIn";
+import Div from "../StyledComponents/SideBarDiv";
 import "./style.css";
-
-const Div = styled.div`
-  background: url("https://my-live-01.slatic.net/p/cc087eee9d580ed61330cc8186cb1198.jpg_1200x1200q80.jpg")
-    no-repeat;
-  background-size: cover;
-  height: 100vh;
-  width: ${(props) => (props.isLogged ? "20vw" : "100vw")};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: all 1s ease-in-out;
-`;
 
 function SideBarContainer(props) {
   return (
     <Div isLogged={props.isLogged}>
       <div className="SideBar-SubContainer">
-        {[1, 2, 3, 4, 5].map((el, i) => (
-          <div key={i}>Element {el}</div>
-        ))}
+        {props.isLogged ? (
+          <Loader
+            component={
+              <SideLinks
+                setIsLogged={props.setIsLogged}
+                isAccountSectionOpen={props.isAccountSectionOpen}
+                setAccountSectionOpen={props.setAccountSectionOpen}
+              />
+            }
+          />
+        ) : (
+          <SignUpAndSignIn />
+        )}
       </div>
     </Div>
   );

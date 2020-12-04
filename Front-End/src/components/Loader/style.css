@@ -1,0 +1,21 @@
+@keyframes Loading {
+  0% {
+    width: 20px;
+  }
+  50% {
+    width: 40px;
+  }
+  100% {
+    width: 20px;
+  }
+}
+
+.LoaderContainer {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.LoaderLogo {
+  animation: Loading 1s infinite cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}

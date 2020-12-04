@@ -1,0 +1,68 @@
+.RoomSpaceHeader {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: thin solid rgba(128, 128, 128, 0.385);
+}
+
+.RoomNameInput {
+  width: 60% !important;
+  text-align: left !important;
+  color: black !important;
+  border-bottom-color: black !important;
+}
+.RoomNameInput::placeholder {
+  color: black !important;
+}
+
+.RoomListSelection {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.RoomFriendSelectionItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.CreateRoomBtn {
+  width: 100px;
+  height: 40px;
+  background-color: #1d103d;
+  border: thin solid #1d103d;
+  color: white;
+  transition: all 500ms;
+}
+
+.CancelBtn {
+  width: 100px;
+  height: 40px;
+  background-color: #3f0c24;
+  border: thin solid#2F1320;
+  color: white;
+  transition: all 500ms;
+}
+
+.DeleteBtn {
+  width: 150px;
+  height: 60px;
+  margin-bottom: 20px;
+  background-color: #5e0808;
+  border: thin solid#2f1313;
+  color: white;
+  transition: all 500ms;
+}
+
+.CreateRoomBtn:hover,
+.CancelBtn:hover,
+.DeleteBtn:hover {
+  filter: brightness(0.8) invert(1);
+  border: thin solid white;
+}
