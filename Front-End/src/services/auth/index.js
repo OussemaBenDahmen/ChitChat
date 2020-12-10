@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT } from "../../redux/actions/Types";
+import { LOG_IN, LOG_OUT } from "../../redux/actions/types";
 
 export const Login = () => ({
   type: LOG_IN,

@@ -10,6 +10,7 @@ function Welcome(props) {
       <h1>Hello and welcome to ChitChat</h1>
       <p>Select a Room or a Friend and start ChitChatting !!</p>
       <AccountSideBarComponent
+        User={props.User}
         isAccountSectionOpen={props.isAccountSectionOpen}
         setAccountSectionOpen={props.setAccountSectionOpen}
         isLogged={props.isLogged}

@@ -3,7 +3,7 @@ import {
   DELETE_ACCOUNT,
   EDIT_ACCOUNT,
   GET_ACCOUNT,
-} from "../Types";
+} from "../types";
 
 export const CreateAccount = () => ({
   type: CREATE_ACCOUNT,

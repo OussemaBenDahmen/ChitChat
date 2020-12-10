@@ -1,26 +1,38 @@
 import Axios from "axios";
 import { Login, Logout } from ".";
-import { CreateAccount } from "../User";
-import { ServerURI } from "../../../services/config";
+
+import { ServerURI } from "../../services/config";
+import { CreateAccount } from "../../redux/actions/User";
 
 export const LogInService = (data) => {
   return (dispatch) => {
     dispatch(Login());
-    Axios.post(`${ServerURI}/connect`, data, {
+    Axios.post(`${ServerURI}/connect/login`, data, {
       withCredentials: true,
     })
-      .then((res) => dispatch({ type: "LOGIN_SUCCESS", payload: res.data }))
-      .catch((err) => dispatch({ type: "LOGIN_ERROR", payload: err }));
+      .then((res) => {
+        dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+        dispatch({ type: "SIGNUP_SUCCESS", payload: res.data });
+      })
+      .catch((err) => {
+        dispatch({ type: "LOGIN_ERROR", payload: err });
+        console.log(err.response.data);
+      });
   };
 };
 
 export const LogOutService = (data) => {
   return (dispatch) => {
     dispatch(Logout());
-    Axios.post(`${ServerURI}/connect`, data, {
+    Axios.post(`${ServerURI}/connect/logout`, data, {
       withCredentials: true,
     })
-      .then((res) => dispatch({ type: "LOGOUT_SUCCESS", payload: res.data }))
+      .then((res) => {
+        dispatch({ type: "LOGOUT_SUCCESS", payload: res.data });
+        setTimeout(() => {
+          window.location.replace("/SignIn");
+        }, 1000);
+      })
       .catch((err) => dispatch({ type: "LOGOUT_ERROR", payload: err }));
   };
 };
@@ -28,13 +40,20 @@ export const LogOutService = (data) => {
 export const SignUpService = (data) => {
   return (dispatch) => {
     dispatch(CreateAccount());
-    Axios.post(`${ServerURI}/connect`, data, {
+    Axios.post(`${ServerURI}/users/signup`, data, {
       withCredentials: true,
     })
       .then((res) => {
+        console.log(res.data);
         dispatch({ type: "SIGNUP_SUCCESS", payload: res.data });
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
       })
-      .catch((err) => dispatch({ type: "SIGNUP_ERROR", payload: err }));
+      .catch((err) => {
+        dispatch({ type: "SIGNUP_ERROR", payload: err });
+        if (err.response.data === "E11000") {
+          console.error("username is already used");
+          console.log(err);
+        }
+      });
   };
 };

@@ -19,6 +19,7 @@ function MessageSection(props) {
       <MessageSectionMain />
       {props.isLogged ? <MessageSectionFooter /> : null}
       <AccountSideBarComponent
+        User={props.User}
         isAccountSectionOpen={props.isAccountSectionOpen}
         setAccountSectionOpen={props.setAccountSectionOpen}
         isLogged={props.isLogged}

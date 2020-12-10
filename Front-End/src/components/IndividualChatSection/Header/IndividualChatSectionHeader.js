@@ -5,7 +5,7 @@ import DropDown from "../../StyledComponents/DropdownDiv";
 function IndividualChatSectionHeader(props) {
   return (
     <header className="MessageSectionHeader">
-      <h2 className="RoomName-FriendName">Friend {props.el}</h2>
+      <h2 className="RoomName-FriendName">{props.el.UserName}</h2>
       <div className="DropDown">
         <button
           className="MessageSectionHeaderDropDownBtn"
