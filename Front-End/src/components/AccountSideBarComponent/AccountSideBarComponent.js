@@ -3,17 +3,26 @@ import AccountSideBar from "../StyledComponents/AccountSideBar";
 import AccountSideBarBackDrop from "../StyledComponents/AcountSideBarBackdrop";
 import StatusSwitch from "../StyledComponents/StatusSwitch";
 import "../MessageSection/style.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { UpdateProfileService } from "../../services/user";
+import { ServerURI } from "../../services/config";
+import { UploadImgService } from "../../services/fileUpload";
+import { LogOutService } from "../../services/auth/auth";
 function AccountSideBarComponent(props) {
   const [isOnline, setIsOnline] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [Profile, setProfile] = useState({ ...props.User });
+
   const dispatch = useDispatch();
   const handleChange = (e) => {
     Profile[e.target.name] = e.target.value;
     setProfile(props.User);
     console.log(Profile);
+  };
+  const upload = (e) => {
+    let Fd = new FormData();
+    Fd.append("Picture", e.target.files[0]);
+    dispatch(UploadImgService(Fd, props.User._id));
   };
   const UploadRef = useRef();
   useEffect(() => {
@@ -37,7 +46,7 @@ function AccountSideBarComponent(props) {
           </button>
           <img
             className="AccountSideBarProfilePic"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6DwG_7wDljpyRLG-iFOmqPDI-LJtR1-cqTQ&usqp=CAU"
+            src={`${ServerURI}/${props.User.picture}`}
             alt="ProfilePic"
           />
           {/* ************************ */}
@@ -47,6 +56,9 @@ function AccountSideBarComponent(props) {
               type="file"
               name="ProfilePic"
               style={{ display: "none" }}
+              onChange={(e) => {
+                upload(e);
+              }}
             />
             <button
               className="UploadFile"
@@ -96,7 +108,7 @@ function AccountSideBarComponent(props) {
                   name="Password"
                   className="EditInput"
                   type="text"
-                  defaultValue={props.User.Password}
+                  placeholder="New password"
                   onChange={(e) => handleChange(e)}
                 />
                 <div>
@@ -125,7 +137,7 @@ function AccountSideBarComponent(props) {
               className="AccountSideBarDisconnectBtn"
               onClick={() => {
                 props.setAccountSectionOpen(false);
-                props.setIsLogged(false);
+                dispatch(LogOutService(props.User));
               }}
             >
               Disconnect

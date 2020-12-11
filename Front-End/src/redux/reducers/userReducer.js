@@ -6,6 +6,8 @@ const userReducer = (state = initialState, action) => {
       return { ...action.payload };
     case "EDIT_PROFILE_SUCCESS":
       return { ...action.payload };
+    case "UPLOAD_IMG_SUCCESS":
+      return { ...action.payload };
     case "DELETE_PROFILE_SUCCESS":
       return {};
     default:

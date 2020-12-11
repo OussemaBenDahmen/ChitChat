@@ -29,22 +29,26 @@ module.exports = {
           console.log(error.message);
           res.status(500).send(error.message.substring(0, 6));
         })
-        .catch((err) => res.status(500).send("something is wrong"));
+        .catch(() => res.status(500).send("something is wrong"));
     });
   },
   edit: (req, res) => {
     let updateProfile = req.body;
     updateProfile.UserName = req.body.UserName.toLowerCase();
-    console.log(updateProfile);
-    UserModel.findByIdAndUpdate(
-      { _id: req.params.id },
-      { $set: updateProfile },
-      { new: true },
-      (err, data) => {
-        if (err) console.log(err);
-        res.json(data);
-      }
-    );
+    PassHash.hashPass(updateProfile.Password)
+      .then((hash) => {
+        updateProfile.Password = hash;
+        UserModel.findByIdAndUpdate(
+          { _id: req.params.id },
+          { $set: updateProfile },
+          { new: true },
+          (err, data) => {
+            if (err) console.log(err);
+            res.json(data);
+          }
+        );
+      })
+      .catch(() => res.status(500).send("something is wrong"));
   },
   delete: (req, res) => {
     UserModel.findByIdAndDelete({ _id: req.params.id }).then((data) =>
@@ -60,5 +64,18 @@ module.exports = {
       res.send(data);
       console.log(data);
     });
+  },
+  profilePicEdit: (req, res) => {
+    const myfile = req.file;
+    UserModel.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $set: { picture: myfile.originalname } },
+      { new: true }
+    )
+      .then((data) => res.json(data))
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send("somthing wrong has happened");
+      });
   },
 };

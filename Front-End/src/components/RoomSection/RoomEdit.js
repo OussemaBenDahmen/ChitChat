@@ -1,11 +1,13 @@
 import React from "react";
 import Scrollbars from "react-custom-scrollbars";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import RoomFriendListElement from "../FriendElemnt/RoomFriendList";
 import RoomSpace from "../StyledComponents/RoomCreatorSpace";
 import "./style.css";
 
 function RoomEdit(props) {
+  const FriendsList = useSelector((state) => state.FriendsList);
   const history = useHistory();
   return (
     <RoomSpace isLogged={props.isLogged}>
@@ -28,7 +30,7 @@ function RoomEdit(props) {
       <h2>Choose your Friends</h2>
       <Scrollbars hideTracksWhenNotNeeded>
         <div className="RoomListSelection">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((el, i) => (
+          {FriendsList.map((el, i) => (
             <div className="RoomFriendSelectionItem" key={i}>
               <input type="checkbox" />
               <RoomFriendListElement el={el} />

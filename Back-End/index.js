@@ -3,9 +3,11 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const os = require("os");
-const userController = require("./controllers/userController");
 const Authentication = require("./helpers/auth/login");
 const userRoute = require("./routers/userRoute");
+const UploadRoute = require("./routers/fileUploadRoute");
+const socket = require("socket.io");
+
 require("dotenv").config();
 const app = express();
 
@@ -48,7 +50,12 @@ mongoose.connect(
 app.post("/connect/login", Authentication.LogIn);
 app.post("/connect/logout", Authentication.LogOut);
 app.use("/users", userRoute);
+app.use("/Upload", UploadRoute);
 
-app.listen(process.env.PORT || 5000, ["*", ...AllowedDomains], () =>
-  console.log(`Server Running on : http://localhost:${process.env.PORT}`)
+const server = app.listen(
+  process.env.PORT || 5000,
+  ["*", ...AllowedDomains],
+  () => console.log(`Server Running on : http://localhost:${process.env.PORT}`)
 );
+
+const io = socket(server);
