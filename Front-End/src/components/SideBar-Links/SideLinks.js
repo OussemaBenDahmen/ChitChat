@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Scrollbars from "react-custom-scrollbars";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { LogOutService } from "../../services/auth/auth";
 import FriendListElement from "../FriendElemnt/FriendListElement";
 import DropDown from "../StyledComponents/DropdownDiv";
+import { GetFriendListService } from "../../services/friendsList";
 
 import "./style.css";
 
 function SideLinks(props) {
+  const User = useSelector((state) => state.User);
+  const FriendsList = useSelector((state) => state.FriendsList);
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    dispatch(GetFriendListService(User._id));
+  }, [dispatch]);
+
   return (
     <div className="SideLinksContainer">
       <div className="SideLinks-Section UserSection">
@@ -34,7 +45,7 @@ function SideLinks(props) {
             <button className="DropDownItem">Status</button>
             <button
               className="DropDownItem"
-              onClick={() => props.setIsLogged(false)}
+              onClick={() => dispatch(LogOutService(User))}
             >
               Disconnect
             </button>
@@ -79,9 +90,9 @@ function SideLinks(props) {
           hideTracksWhenNotNeeded
           className="FriendsListScrollBar"
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((el, i) => (
-            <Link className="FriendListLink" to={`/Chat_id=${el}`} key={i}>
-              <FriendListElement el={el} />
+          {FriendsList.map((el, i) => (
+            <Link className="FriendListLink" to={`/Chat_id=${el._id}`} key={i}>
+              <FriendListElement el={el} indx={i} />
             </Link>
           ))}
         </Scrollbars>

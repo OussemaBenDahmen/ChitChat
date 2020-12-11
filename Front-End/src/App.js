@@ -8,23 +8,19 @@ import RoomEdit from "./components/RoomSection/RoomEdit";
 import IndividualChatSection from "./components/IndividualChatSection/IndividualChatSection";
 import MessageSpace from "./components/StyledComponents/MessageSpace";
 import Welcome from "./components/WelcomingSpace/Welcome";
+import { useSelector } from "react-redux";
 
 function App() {
-  const [isLogged, setIsLogged] = useState(true);
+  const isLogged = useSelector((state) => state.isLogged);
   const [isAccountSectionOpen, setAccountSectionOpen] = useState(false);
+  const User = useSelector((state) => state.User);
+  const FriendsList = useSelector((state) => state.FriendsList);
   return (
     <div className="App">
       <Router>
-        <button
-          style={{ position: "absolute", right: "20px", zIndex: "1231351" }}
-          onClick={() => setIsLogged(!isLogged)}
-        >
-          Click
-        </button>
         <div className="Interface">
           <SideBarContainer
             isLogged={isLogged}
-            setIsLogged={setIsLogged}
             isAccountSectionOpen={isAccountSectionOpen}
             setAccountSectionOpen={setAccountSectionOpen}
           />
@@ -39,20 +35,20 @@ function App() {
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((el, i) => (
               <Route path={`/Room_id=${el}`} exact key={i}>
                 <MessageSection
+                  User={User}
                   el={el}
                   isLogged={isLogged}
-                  setIsLogged={setIsLogged}
                   isAccountSectionOpen={isAccountSectionOpen}
                   setAccountSectionOpen={setAccountSectionOpen}
                 />
               </Route>
             ))}
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((el, i) => (
-              <Route path={`/Chat_id=${el}`} exact key={i}>
+            {FriendsList.map((el, i) => (
+              <Route path={`/Chat_id=${el._id}`} exact key={i}>
                 <IndividualChatSection
+                  User={User}
                   el={el}
                   isLogged={isLogged}
-                  setIsLogged={setIsLogged}
                   isAccountSectionOpen={isAccountSectionOpen}
                   setAccountSectionOpen={setAccountSectionOpen}
                 />
@@ -60,6 +56,7 @@ function App() {
             ))}
             <Route path="/">
               <Welcome
+                User={User}
                 isLogged={isLogged}
                 isAccountSectionOpen={isAccountSectionOpen}
                 setAccountSectionOpen={setAccountSectionOpen}

@@ -9,7 +9,7 @@ function MessageSectionMain() {
   }, []);
   return (
     <main className="MessageSectionMain">
-      <Scrollbars autoHide hideTracksWhenNotNeeded autoHide>
+      <Scrollbars autoHide hideTracksWhenNotNeeded>
         {[1, 2, 3, 4, 5, 6].map((el, i) => (
           <MessageElement key={i}>
             <img

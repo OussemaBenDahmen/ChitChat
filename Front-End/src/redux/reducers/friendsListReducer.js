@@ -2,7 +2,7 @@ const initialState = [];
 const friendsListReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_FRIENDLIST_SUCCESS":
-      return [...state, ...action.payload];
+      return [...action.payload];
     case "MUTE_FRIEND_SUCCESS":
       const indx = state.indexOf((el) => el._id === action.payload._id);
       const newState = [...state];
