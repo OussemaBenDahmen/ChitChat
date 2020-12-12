@@ -8,15 +8,18 @@ import DropDown from "../StyledComponents/DropdownDiv";
 import { GetFriendListService } from "../../services/friendsList";
 
 import "./style.css";
+import { GetMyRoomsService } from "../../services/rooms";
 
 function SideLinks(props) {
   const User = useSelector((state) => state.User);
   const FriendsList = useSelector((state) => state.FriendsList);
+  const Rooms = useSelector((state) => state.Rooms);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     dispatch(GetFriendListService(User._id));
+    dispatch(GetMyRoomsService(User));
   }, [dispatch]);
 
   return (
@@ -57,7 +60,7 @@ function SideLinks(props) {
         <input className="SearchInput" type="text" placeholder="# Search" />
         <div className="RoomLink">
           <Link className="SideBarRoomsLink" to="/Create_Room">
-            <i className="fa fa-plus"></i> Create a Group
+            <i className="fa fa-plus"></i> Create a Room
           </Link>
         </div>
         <Scrollbars
@@ -67,14 +70,14 @@ function SideLinks(props) {
           className="RoomListScrollBar"
         >
           <div className="RoomsList">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((el, i) => (
+            {Rooms.map((el, i) => (
               <li className="RoomLink" key={i}>
                 <Link
                   className="SideBarRoomsLink"
-                  to={`/Room_id=${el}`}
+                  to={`/Room_id=${el._id}`}
                   key={i}
                 >
-                  # Room {el}
+                  # {el.RoomName}
                 </Link>
               </li>
             ))}

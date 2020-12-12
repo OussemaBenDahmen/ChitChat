@@ -13,17 +13,6 @@ function IndividualChatSectionHeader(props) {
         >
           <i className="fa fa-ellipsis-v"></i>
         </button>
-        <DropDown isOpen={props.isDropDownOpen}>
-          <button
-            className="MessageSectionDropDownContent"
-            onClick={() => {
-              props.setIsDropDownOpen(false);
-            }}
-          >
-            Mute
-          </button>
-          <button className="MessageSectionDropDownContent">Block</button>
-        </DropDown>
       </div>
     </header>
   );

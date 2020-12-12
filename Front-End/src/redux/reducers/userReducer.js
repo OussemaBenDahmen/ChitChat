@@ -4,6 +4,8 @@ const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SIGNUP_SUCCESS":
       return { ...action.payload };
+    case "GET_PROFILE_SUCCESS":
+      return { ...action.payload };
     case "EDIT_PROFILE_SUCCESS":
       return { ...action.payload };
     case "UPLOAD_IMG_SUCCESS":

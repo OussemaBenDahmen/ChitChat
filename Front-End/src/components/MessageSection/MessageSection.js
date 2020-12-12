@@ -12,6 +12,7 @@ function MessageSection(props) {
   return (
     <MessageSpace isLogged={props.isLogged}>
       <MessageSectionHeader
+        User={props.User}
         el={props.el}
         isDropDownOpen={isDropDownOpen}
         setIsDropDownOpen={setIsDropDownOpen}

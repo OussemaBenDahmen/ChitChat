@@ -57,12 +57,11 @@ module.exports = {
   },
   getLogged: (req, res) => {
     let mytoken = req.cookies.token;
-    console.log(mytoken);
+
     let decoded = jwt.verify(mytoken, process.env.SECRET_KEY);
 
     UserModel.findById({ _id: decoded._id }).then((data) => {
       res.send(data);
-      console.log(data);
     });
   },
   profilePicEdit: (req, res) => {

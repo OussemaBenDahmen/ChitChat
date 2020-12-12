@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
 const objectId = require("mongoose").Schema.Types.ObjectId;
 const ConversationSchema = new mongoose.Schema({
-  Groupe: { type: objectId, ref: "Groupes" },
+  Room: { type: objectId, ref: "Groupes" },
   Messages: [(msg = { type: objectId, ref: "Msgs" })],
 });
 
-const ConversationModel = mongoose.model("Conversation", ConversationSchema);
+const RoomConversationModel = mongoose.model(
+  "RoomConversation",
+  ConversationSchema
+);
 
 module.exports = ConversationModel;

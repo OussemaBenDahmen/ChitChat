@@ -1,20 +1,36 @@
-import { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import "./App.css";
 import RoomCreation from "./components/RoomSection/RoomCreation";
 import MessageSection from "./components/MessageSection/MessageSection";
 import SideBarContainer from "./components/SideBarContainer";
 import RoomEdit from "./components/RoomSection/RoomEdit";
 import IndividualChatSection from "./components/IndividualChatSection/IndividualChatSection";
-import MessageSpace from "./components/StyledComponents/MessageSpace";
 import Welcome from "./components/WelcomingSpace/Welcome";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { GetProfileService } from "./services/user";
+import { GetFriendsList } from "./redux/actions/Friends";
+import { GetMyRoomsService } from "./services/rooms";
 
 function App() {
-  const isLogged = useSelector((state) => state.isLogged);
+  const dispatch = useDispatch();
+  const isLogged = localStorage.getItem("isLogged") === "true" ? true : false;
   const [isAccountSectionOpen, setAccountSectionOpen] = useState(false);
   const User = useSelector((state) => state.User);
   const FriendsList = useSelector((state) => state.FriendsList);
+  const Rooms = useSelector((state) => state.Rooms);
+  const SingleRoom = useSelector((state) => state.SingleRoom);
+
+  useEffect(() => {
+    dispatch(GetProfileService());
+    dispatch(GetFriendsList(User));
+    dispatch(GetMyRoomsService(User));
+  }, [dispatch]);
   return (
     <div className="App">
       <Router>
@@ -30,10 +46,10 @@ function App() {
               <RoomCreation isLogged={isLogged} />
             </Route>
             <Route path="/Edit_Room">
-              <RoomEdit isLogged={isLogged} />
+              <RoomEdit isLogged={isLogged} myRoom={SingleRoom} />
             </Route>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((el, i) => (
-              <Route path={`/Room_id=${el}`} exact key={i}>
+            {Rooms.map((el, i) => (
+              <Route path={`/Room_id=${el._id}`} exact key={i}>
                 <MessageSection
                   User={User}
                   el={el}

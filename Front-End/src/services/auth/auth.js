@@ -11,6 +11,7 @@ export const LogInService = (data) => {
       withCredentials: true,
     })
       .then((res) => {
+        localStorage.setItem("isLogged", true);
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
         dispatch({ type: "SIGNUP_SUCCESS", payload: res.data });
       })
@@ -28,6 +29,7 @@ export const LogOutService = (data) => {
       withCredentials: true,
     })
       .then((res) => {
+        localStorage.setItem("isLogged", false);
         dispatch({ type: "LOGOUT_SUCCESS", payload: res.data });
         setTimeout(() => {
           window.location.replace("/SignIn");
@@ -44,6 +46,7 @@ export const SignUpService = (data) => {
       withCredentials: true,
     })
       .then((res) => {
+        localStorage.setItem("isLogged", true);
         console.log(res.data);
         dispatch({ type: "SIGNUP_SUCCESS", payload: res.data });
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data });

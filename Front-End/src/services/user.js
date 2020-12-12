@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { DeleteAccount, EditAccount } from "../redux/actions/User";
+import { DeleteAccount, EditAccount, GetAccount } from "../redux/actions/User";
 import { ServerURI } from "./config";
 
 export const UpdateProfileService = (data) => {
@@ -32,10 +32,10 @@ export const DeleteProfileService = (data) => {
   };
 };
 
-export const GetProfileService = (data) => {
+export const GetProfileService = () => {
   return (dispatch) => {
-    dispatch(EditAccount());
-    Axios.get(`${ServerURI}/users_id=${data._id}`, {
+    dispatch(GetAccount());
+    Axios.get(`${ServerURI}/users/getLogged`, {
       withCredentials: true,
     })
       .then((res) =>
