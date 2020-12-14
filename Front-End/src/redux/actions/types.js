@@ -15,3 +15,4 @@ export const EDIT_ROOM = "EDIT_ROOM";
 export const LEAVE_ROOM = "LEAVE_ROOM";
 export const DELETE_ROOM = "DELETE_ROOM";
 export const UPLOAD_IMG = "UPLOAD_IMG";
+export const GET_CONVERSATION = "GET_CONVERSATION";

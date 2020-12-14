@@ -17,3 +17,18 @@ export const UploadImgService = (file, id) => {
       });
   };
 };
+
+export const UploadMsgFileService = (file) => {
+  return (dispatch) => {
+    dispatch(UploadFile());
+    Axios.post(ServerURI + "/Upload/file", file, {
+      withCredentials: true,
+    })
+      .then((res) => {
+        dispatch({ type: "UPLOAD_IMG_SUCCESS", payload: res.data });
+      })
+      .catch((err) => {
+        dispatch({ type: "UPLOAD_IMG_ERROR", payload: err });
+      });
+  };
+};

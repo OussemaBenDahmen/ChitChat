@@ -7,7 +7,7 @@ const Authentication = require("./helpers/auth/login");
 const userRoute = require("./routers/userRoute");
 const UploadRoute = require("./routers/fileUploadRoute");
 const roomRoutes = require("./routers/roomRoutes");
-const socket = require("socket.io");
+const Socket = require("./socket.io");
 
 require("dotenv").config();
 const app = express();
@@ -61,4 +61,4 @@ const server = app.listen(
   () => console.log(`Server Running on : http://localhost:${process.env.PORT}`)
 );
 
-const io = socket(server);
+const io = Socket(server);

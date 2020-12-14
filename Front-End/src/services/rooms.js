@@ -1,10 +1,12 @@
 import Axios from "axios";
+import { GetConversation } from "../redux/actions/Conversations/Conversations";
 import {
   CreateRoom,
   DeleteRoom,
   EditRoom,
   GetRooms,
   GetSingleRoom,
+  LeaveRoom,
 } from "../redux/actions/Rooms";
 import { ServerURI } from "./config";
 
@@ -24,6 +26,7 @@ export const GetMyRoomsService = (data) => {
 export const GetSingleRoomService = (id) => {
   return (dispatch) => {
     dispatch(GetSingleRoom());
+    dispatch(GetConversation());
     Axios.get(`${ServerURI}/Rooms/Room_id=${id}`, {
       withCredentials: true,
     })
@@ -33,6 +36,16 @@ export const GetSingleRoomService = (id) => {
       .catch((err) =>
         dispatch({ type: "GET_SINGLE_ROOM_ERROR", payload: err })
       );
+    Axios.get(`${ServerURI}/Rooms/Conversation_id=${id}`, {
+      withCredentials: true,
+    })
+      .then((res) => {
+        console.log(res.data);
+        dispatch({ type: "GET_CONVERSATION_SUCCESS", payload: res.data });
+      })
+      .catch((err) => {
+        dispatch({ type: "GET_CONVERSATION_ERROR", payload: err });
+      });
   };
 };
 
@@ -93,6 +106,22 @@ export const DeleteRoomService = (data) => {
           type: "DELETE_ROOM_ERROR",
           payload: err,
         });
+      });
+  };
+};
+
+export const LeaveRoomService = ({ Room_id, User }) => {
+  return (dispatch) => {
+    dispatch(LeaveRoom());
+    Axios.put(`${ServerURI}/Rooms/Leave/Room_id=${Room_id}`, User, {
+      withCredentials: true,
+    })
+      .then((res) => {
+        dispatch({ type: "LEAVE_ROOM_SUCCESS", payload: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({ type: "LEAVE_ROOM_ERROR", payload: err });
       });
   };
 };

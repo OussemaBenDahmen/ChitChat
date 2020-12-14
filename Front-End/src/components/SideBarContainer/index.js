@@ -13,6 +13,8 @@ function SideBarContainer(props) {
           <Loader
             component={
               <SideLinks
+                isOpen={props.isOpen}
+                setIsOpen={props.setIsOpen}
                 setIsLogged={props.setIsLogged}
                 isAccountSectionOpen={props.isAccountSectionOpen}
                 setAccountSectionOpen={props.setAccountSectionOpen}

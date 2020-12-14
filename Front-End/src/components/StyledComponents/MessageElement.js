@@ -14,7 +14,7 @@ const MessageElement = styled.div`
   min-height: 60px;
   margin: 20px 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
   animation: ${MessageAnimation} 500ms ease-in-out 1;
 `;

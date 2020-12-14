@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import isLogged from "./authReducer";
+import ConversationReducer from "./ConversationReducer";
 import friendsListReducer from "./friendsListReducer";
 import roomReducer from "./roomReducer";
 import SingleRoomReducer from "./singleRoomReducer";
@@ -11,5 +12,6 @@ const rootReducer = combineReducers({
   FriendsList: friendsListReducer,
   Rooms: roomReducer,
   SingleRoom: SingleRoomReducer,
+  Conversation: ConversationReducer,
 });
 export default rootReducer;

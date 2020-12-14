@@ -9,4 +9,8 @@ router.post(
   userController.profilePicEdit
 );
 
+router.post("/file", Upload.single("MsgFile"), () => {
+  console.log("done");
+});
+
 module.exports = router;

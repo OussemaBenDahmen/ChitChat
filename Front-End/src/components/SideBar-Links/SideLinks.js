@@ -15,13 +15,12 @@ function SideLinks(props) {
   const FriendsList = useSelector((state) => state.FriendsList);
   const Rooms = useSelector((state) => state.Rooms);
   const dispatch = useDispatch();
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     dispatch(GetFriendListService(User._id));
     dispatch(GetMyRoomsService(User));
   }, [dispatch]);
-
   return (
     <div className="SideLinksContainer">
       <div className="SideLinks-Section UserSection">
@@ -30,17 +29,18 @@ function SideLinks(props) {
           <button
             className="SideBarUserSectionGearBtn"
             onClick={() => {
-              setIsOpen(!isOpen);
+              props.setIsOpen(!props.isOpen);
             }}
           >
             <i className="fa fa-cog gear"></i>
           </button>
-          <DropDown isOpen={isOpen}>
+
+          <DropDown isOpen={props.isOpen}>
             <button
               className="DropDownItem"
               onClick={() => {
                 props.setAccountSectionOpen(!props.AccountSectionOpen);
-                setIsOpen(false);
+                props.setIsOpen(false);
               }}
             >
               Account

@@ -32,6 +32,11 @@ function AccountSideBarComponent(props) {
   return (
     <AccountSideBarBackDrop
       isOpen={props.isLogged && props.isAccountSectionOpen}
+      onClick={(e) => {
+        if (e.clientX < window.visualViewport.width - 300) {
+          props.setAccountSectionOpen(false);
+        }
+      }}
     >
       <AccountSideBar isOpen={props.isLogged && props.isAccountSectionOpen}>
         <div className="AccountSideBarContent">

@@ -65,6 +65,7 @@
   color: gray;
 }
 .MessageTxt {
+  padding: 0 15px;
   font-size: medium;
 }
 

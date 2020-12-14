@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MessageSpace from "../StyledComponents/MessageSpace";
 import ChitChatLogo from "../../assets/ChitChatLogo.png";
 import AccountSideBarComponent from "../AccountSideBarComponent/AccountSideBarComponent";
+import { Socket } from "socket.io-client";
 
 function Welcome(props) {
   return (

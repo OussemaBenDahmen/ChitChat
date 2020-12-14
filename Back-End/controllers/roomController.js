@@ -1,13 +1,18 @@
+const RoomConversationModel = require("../models/roomConversation");
 const RoomModel = require("../models/roomModel");
 
 module.exports = {
   Create: (req, res) => {
     const newRoom = new RoomModel(req.body);
 
-    newRoom.save().then((data) => {
-      RoomModel.findById({ _id: data._id })
+    newRoom.save().then((Room) => {
+      RoomModel.findById({ _id: Room._id })
         .populate("RoomCreator")
         .then((data) => {
+          const newRoomConversation = RoomConversationModel({
+            Room: data,
+          });
+          newRoomConversation.save();
           res.json(data);
         })
         .catch((err) => res.status(500).send("Can't create room try again"));
@@ -27,6 +32,26 @@ module.exports = {
           res.json(data);
         })
     );
+  },
+  LeaveRoom: (req, res) => {
+    RoomModel.findById({ _id: req.params.id })
+      .populate("UsersList")
+      .then((room) => {
+        let newUsersList = room.UsersList.filter(
+          (el) => el._id != req.body._id
+        );
+        RoomModel.findByIdAndUpdate(
+          { _id: req.params.id },
+          { $set: { UsersList: newUsersList } },
+          { new: true }
+        )
+          .populate("RoomCreator UsersList")
+          .then((data) => {
+            console.log(data);
+            res.status(200).json(data);
+          });
+      })
+      .catch(() => res.status(500).send("Some error has occured"));
   },
   Delete: (req, res) => {
     RoomModel.findByIdAndDelete({ _id: req.params.id }).then((data) => {

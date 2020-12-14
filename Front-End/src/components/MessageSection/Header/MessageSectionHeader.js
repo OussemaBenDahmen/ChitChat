@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { GetSingleRoomService } from "../../../services/rooms";
+import { Link, useHistory } from "react-router-dom";
+import {
+  GetSingleRoomService,
+  LeaveRoomService,
+} from "../../../services/rooms";
 import DropDown from "../../StyledComponents/DropdownDiv";
 
 function MessageSectionHeader(props) {
   const dispatch = useDispatch();
+  const history = useHistory();
   useEffect(() => {
     dispatch(GetSingleRoomService(props.el._id));
   }, [dispatch]);
@@ -32,7 +36,15 @@ function MessageSectionHeader(props) {
               Edit Room
             </Link>
           ) : (
-            <button className="MessageSectionDropDownContent">
+            <button
+              className="MessageSectionDropDownContent"
+              onClick={() => {
+                dispatch(
+                  LeaveRoomService({ Room_id: props.el._id, User: props.User })
+                );
+                history.goBack();
+              }}
+            >
               Leave Room
             </button>
           )}
