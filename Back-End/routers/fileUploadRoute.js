@@ -9,7 +9,8 @@ router.post(
   userController.profilePicEdit
 );
 
-router.post("/file", Upload.single("MsgFile"), () => {
+router.post("/file", Upload.single("MsgFile"), (req, res) => {
+  res.json({ msg: "done" });
   console.log("done");
 });
 

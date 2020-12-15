@@ -40,8 +40,6 @@ function MessageSectionFooter(props) {
     const fd = new FormData();
     fd.append("MsgFile", e.target.files[0]);
 
-    dispatch(UploadMsgFileService(fd));
-
     if (Mytype.includes("image")) {
       Message.MsgType = "image";
     } else if (Mytype.includes("audio")) {
@@ -60,12 +58,15 @@ function MessageSectionFooter(props) {
     }
 
     setMessage(Message);
-    SendMessageSocket({
-      Message,
-      Reciever: props.Friend || props.Room,
-      destination: destination,
-      Conversation: props.Conversation,
-    });
+    dispatch(
+      UploadMsgFileService(fd, {
+        Message,
+        Reciever: props.Friend || props.Room,
+        destination: destination,
+        Conversation: props.Conversation,
+      })
+    );
+
     console.log(Message);
   };
 

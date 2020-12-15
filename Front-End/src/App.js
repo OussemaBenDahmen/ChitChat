@@ -41,7 +41,6 @@ function App() {
 
   useEffect(() => {
     if (isLogged === true && User.UserName) {
-      console.log(User);
       socket.emit("LogIn", { log: User });
       socket.on("Log-notification", (data) => {
         console.log(data.msg);
