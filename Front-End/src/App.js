@@ -10,8 +10,8 @@ import IndividualChatSection from "./components/IndividualChatSection/Individual
 import Welcome from "./components/WelcomingSpace/Welcome";
 import { useSelector, useDispatch } from "react-redux";
 import { GetProfileService } from "./services/user";
-import { GetFriendsList } from "./redux/actions/Friends";
 import { GetMyRoomsService } from "./services/rooms";
+import { GetFriendListService } from "./services/friendsList";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,10 +34,12 @@ function App() {
   };
 
   useEffect(() => {
-    dispatch(GetProfileService());
-    dispatch(GetFriendsList(User));
-    dispatch(GetMyRoomsService(User));
-  }, [dispatch]);
+    if (isLogged) {
+      dispatch(GetProfileService());
+      dispatch(GetFriendListService(User._id));
+      dispatch(GetMyRoomsService(User));
+    }
+  }, [dispatch, isLogged]);
 
   useEffect(() => {
     if (isLogged === true && User.UserName) {

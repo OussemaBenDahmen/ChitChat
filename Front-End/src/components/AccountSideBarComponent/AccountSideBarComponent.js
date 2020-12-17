@@ -4,10 +4,14 @@ import AccountSideBarBackDrop from "../StyledComponents/AcountSideBarBackdrop";
 import StatusSwitch from "../StyledComponents/StatusSwitch";
 import "../MessageSection/style.css";
 import { useDispatch } from "react-redux";
-import { UpdateProfileService } from "../../services/user";
+import {
+  DeleteProfileService,
+  UpdateProfileService,
+} from "../../services/user";
 import { ServerURI } from "../../services/config";
 import { UploadImgService } from "../../services/fileUpload";
 import { LogOutService } from "../../services/auth/auth";
+import { Link } from "react-router-dom";
 function AccountSideBarComponent(props) {
   const [isOnline, setIsOnline] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -129,7 +133,10 @@ function AccountSideBarComponent(props) {
                   </button>
                   <button
                     className="AccountSideBarDeleteBtn"
-                    onClick={() => setIsEditing(false)}
+                    onClick={() => {
+                      dispatch(DeleteProfileService(props.User._id));
+                      setIsEditing(false);
+                    }}
                   >
                     <i className="fa fa-trash"></i>
                   </button>
@@ -138,7 +145,8 @@ function AccountSideBarComponent(props) {
             ) : (
               <div></div>
             )}
-            <button
+            <Link
+              to="/SignIn"
               className="AccountSideBarDisconnectBtn"
               onClick={() => {
                 props.setAccountSectionOpen(false);
@@ -146,7 +154,7 @@ function AccountSideBarComponent(props) {
               }}
             >
               Disconnect
-            </button>
+            </Link>
           </div>
         </div>
       </AccountSideBar>
