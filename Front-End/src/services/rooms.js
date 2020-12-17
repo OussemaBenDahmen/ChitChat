@@ -19,7 +19,10 @@ export const GetMyRoomsService = (data) => {
       .then((res) => {
         dispatch({ type: "GET_ROOMS_SUCCESS", payload: res.data });
       })
-      .catch((err) => dispatch({ type: "GET_ROOMS_ERROR", payload: err }));
+      .catch((err) => {
+        dispatch({ type: "GET_ROOMS_ERROR", payload: err });
+        alert(err.response.data);
+      });
   };
 };
 
@@ -33,9 +36,10 @@ export const GetSingleRoomService = (id) => {
       .then((res) => {
         dispatch({ type: "GET_SINGLE_ROOM_SUCCESS", payload: res.data });
       })
-      .catch((err) =>
-        dispatch({ type: "GET_SINGLE_ROOM_ERROR", payload: err })
-      );
+      .catch((err) => {
+        dispatch({ type: "GET_SINGLE_ROOM_ERROR", payload: err });
+        alert(err.response.data);
+      });
     Axios.get(`${ServerURI}/Rooms/Conversation_id=${id}`, {
       withCredentials: true,
     })
@@ -45,6 +49,7 @@ export const GetSingleRoomService = (id) => {
       })
       .catch((err) => {
         dispatch({ type: "GET_CONVERSATION_ERROR", payload: err });
+        alert(err.response.data);
       });
   };
 };
@@ -64,6 +69,7 @@ export const CreateRoomService = (data) => {
           type: "CREATE_ROOM_ERROR",
           payload: err,
         });
+        alert(err.response.data);
       });
   };
 };
@@ -85,6 +91,7 @@ export const EditRoomService = (data) => {
           type: "EDIT_ROOM_ERROR",
           payload: err,
         });
+        alert(err.response.data);
       });
   };
 };
@@ -106,6 +113,7 @@ export const DeleteRoomService = (data) => {
           type: "DELETE_ROOM_ERROR",
           payload: err,
         });
+        alert(err.response.data);
       });
   };
 };
@@ -120,8 +128,8 @@ export const LeaveRoomService = ({ Room_id, User }) => {
         dispatch({ type: "LEAVE_ROOM_SUCCESS", payload: res.data });
       })
       .catch((err) => {
-        console.log(err);
         dispatch({ type: "LEAVE_ROOM_ERROR", payload: err });
+        alert(err.response.data);
       });
   };
 };

@@ -16,6 +16,7 @@ export const UploadImgService = (file, id) => {
       })
       .catch((err) => {
         dispatch({ type: "UPLOAD_IMG_ERROR", payload: err });
+        alert(err.response.data);
       });
   };
 };
