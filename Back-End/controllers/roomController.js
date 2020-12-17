@@ -5,18 +5,22 @@ module.exports = {
   Create: (req, res) => {
     const newRoom = new RoomModel(req.body);
 
-    newRoom.save().then((Room) => {
-      RoomModel.findById({ _id: Room._id })
-        .populate("RoomCreator")
-        .then((data) => {
-          const newRoomConversation = RoomConversationModel({
-            Room: data,
+    newRoom
+      .save()
+      .then((Room) => {
+        RoomModel.findById({ _id: Room._id })
+          .populate("RoomCreator")
+          .then((data) => {
+            const newRoomConversation = RoomConversationModel({
+              Room: data,
+            });
+            newRoomConversation.save();
+            res.json(data);
           });
-          newRoomConversation.save();
-          res.json(data);
-        })
-        .catch((err) => res.status(500).send("Can't create room try again"));
-    });
+      })
+      .catch((err) => {
+        res.status(500).send("Please fill the RoomName input and select users");
+      });
   },
   Edit: (req, res) => {
     RoomModel.findByIdAndUpdate(
@@ -24,14 +28,20 @@ module.exports = {
 
       { $set: req.body },
       { new: true }
-    ).then((data) =>
-      RoomModel.findById({ _id: data._id })
-        .populate("RoomCreator UsersList")
-        .then((data) => {
-          console.log(data);
-          res.json(data);
-        })
-    );
+    )
+      .then((data) =>
+        RoomModel.findById({ _id: data._id })
+          .populate("RoomCreator UsersList")
+          .then((data) => {
+            console.log(data);
+            res.json(data);
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(500).send("Can't edit room try again later");
+          })
+      )
+      .catch((err) => console.log(err));
   },
   LeaveRoom: (req, res) => {
     RoomModel.findById({ _id: req.params.id })

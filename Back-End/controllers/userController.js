@@ -63,7 +63,11 @@ module.exports = {
   },
   delete: (req, res) => {
     UserModel.findByIdAndDelete({ _id: req.params.id }).then((data) =>
-      res.json(data).catch((err) => res.json(err))
+      res
+        .json(data)
+        .catch((err) =>
+          res.status(500).send("Can't delete User, try again later")
+        )
     );
   },
   getLogged: (req, res) => {

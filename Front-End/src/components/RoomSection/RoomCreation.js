@@ -24,13 +24,13 @@ function RoomCreation(props) {
   };
   const CreateRoomFunction = () => {
     Room.UsersList = SelecteUsers;
-    console.log(Room);
-    if (Room.RoomName !== "" && Room.UsersList !== []) {
+
+    if (Room.RoomName !== "" && Room.UsersList.length > 0) {
       Room.RoomCreator = User;
       dispatch(CreateRoomService(Room));
       history.goBack();
     } else {
-      alert("Test Alert");
+      alert("Please fill the RoomName input and select users");
     }
   };
   return (
