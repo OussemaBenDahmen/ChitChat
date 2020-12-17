@@ -1,5 +1,6 @@
 import Axios from "axios";
-import { DeleteAccount, EditAccount } from "../redux/actions/User";
+import { GetConversation } from "../redux/actions/Conversations/Conversations";
+import { DeleteAccount, EditAccount, GetAccount } from "../redux/actions/User";
 import { ServerURI } from "./config";
 
 export const UpdateProfileService = (data) => {
@@ -32,10 +33,10 @@ export const DeleteProfileService = (data) => {
   };
 };
 
-export const GetProfileService = (data) => {
+export const GetProfileService = () => {
   return (dispatch) => {
-    dispatch(EditAccount());
-    Axios.get(`${ServerURI}/users_id=${data._id}`, {
+    dispatch(GetAccount());
+    Axios.get(`${ServerURI}/users/getLogged`, {
       withCredentials: true,
     })
       .then((res) =>
@@ -43,6 +44,26 @@ export const GetProfileService = (data) => {
       )
       .catch((err) => {
         dispatch({ type: "GET_PROFILE_ERROR", payload: err });
+      });
+  };
+};
+
+export const GetSingleUserConversation = ({ user_id, friend_id }) => {
+  return (dispatch) => {
+    dispatch(GetConversation());
+    Axios.post(
+      `${ServerURI}/Users/Conversation_id=${friend_id}`,
+      { user_id },
+      {
+        withCredentials: true,
+      }
+    )
+      .then((res) => {
+        console.log(res.data);
+        dispatch({ type: "GET_CONVERSATION_SUCCESS", payload: res.data });
+      })
+      .catch((err) => {
+        dispatch({ type: "GET_CONVERSATION_ERROR", payload: err });
       });
   };
 };

@@ -4,7 +4,7 @@ import "./style.css";
 function Loader({ component = component, ...rest }) {
   const [isLoading, setIsLoading] = useState(true);
   const FakeLoader = () => {
-    setTimeout(() => setIsLoading(false), 5000);
+    setTimeout(() => setIsLoading(false), 3000);
   };
   useEffect(() => {
     FakeLoader();

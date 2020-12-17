@@ -3,14 +3,18 @@ import {
   DELETE_ROOM,
   EDIT_ROOM,
   GET_ROOMS,
+  GET_SINGLE_ROOM,
   LEAVE_ROOM,
-} from "../Types";
+} from "../types";
 
 export const CreateRoom = () => ({
   type: CREATE_ROOM,
 });
 export const GetRooms = () => ({
   type: GET_ROOMS,
+});
+export const GetSingleRoom = () => ({
+  type: GET_SINGLE_ROOM,
 });
 
 export const EditRoom = () => ({

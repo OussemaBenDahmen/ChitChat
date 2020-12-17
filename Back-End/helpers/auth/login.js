@@ -43,7 +43,7 @@ module.exports = Authentication = {
       { new: true },
       (err, data) => {
         if (err) console.log(err);
-        res.cookie("token", "maxAge=0").send("done");
+        res.cookie("token", "", { maxAge: 0, httpOnly: true }).send("done");
       }
     );
   },

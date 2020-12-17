@@ -1,37 +1,36 @@
 import React, { useEffect, useRef } from "react";
 import Scrollbars from "react-custom-scrollbars";
+import { ServerURI } from "../../../services/config";
+import MessageValue from "../../MessageValue/MessageValue";
 import MessageElement from "../../StyledComponents/MessageElement";
 
-function MessageSectionMain() {
+function MessageSectionMain(props) {
   const BottomDiv = useRef();
   useEffect(() => {
     BottomDiv.current.scrollIntoView(false);
-  }, []);
+  }, [props]);
   return (
     <main className="MessageSectionMain">
       <Scrollbars autoHide hideTracksWhenNotNeeded>
-        {[1, 2, 3, 4, 5, 6].map((el, i) => (
+        {props.Conversation.Messages.map((el, i) => (
           <MessageElement key={i}>
             <img
               className="MessageElementImage"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6DwG_7wDljpyRLG-iFOmqPDI-LJtR1-cqTQ&usqp=CAU"
+              src={`${ServerURI}/${el.SenderId.picture}`}
               alt="UserImage"
             />
             <div className="MessageElementContent">
               <div className="MessageSenderNameAndDate">
-                <h4 className="MessageSenderName">Oussema Ben Dahmen</h4>
-                <h5 className="MessageDate">13:45 AM</h5>
+                <h4 className="MessageSenderName">{el.SenderId.UserName}</h4>
+                <h5 className="MessageDate">
+                  {el.Date.substring(0, 10) + "/" + el.Date.substring(11, 16)}
+                </h5>
               </div>
-              <div className="MessageTxt">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
-                recusandae atque ipsum quo sit ipsa enim animi, commodi totam
-                debitis necessitatibus quos eos porro suscipit placeat ex nobis
-                libero qui?
-              </div>
+              <MessageValue message={el} />
             </div>
           </MessageElement>
         ))}
-        <p ref={BottomDiv}></p>
+        <div ref={BottomDiv}></div>
       </Scrollbars>
     </main>
   );

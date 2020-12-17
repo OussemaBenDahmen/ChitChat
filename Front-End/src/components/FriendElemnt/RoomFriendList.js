@@ -1,14 +1,15 @@
 import React from "react";
+import { ServerURI } from "../../services/config";
 
 function RoomFriendListElement(props) {
   return (
     <div className="SideBarFriendElement">
       <img
         className="SideBarFriendImg"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6DwG_7wDljpyRLG-iFOmqPDI-LJtR1-cqTQ&usqp=CAU"
+        src={`${ServerURI}/${props.el.picture}`}
         alt="Friend"
       />
-      <h5 style={{ color: "black" }}>Friend {props.el}</h5>
+      <h5 style={{ color: "black" }}>{props.el.UserName}</h5>
     </div>
   );
 }

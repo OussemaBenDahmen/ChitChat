@@ -1,16 +1,12 @@
 const mongoose = require("mongoose");
 const ObjectId = require("mongoose").Schema.Types.ObjectId;
 const MsgSchema = new mongoose.Schema({
-  Value: { type: String, required },
+  Value: { type: String, required: true },
   SenderId: {
     type: ObjectId,
     ref: "Users",
   },
-  RecieverId: {
-    type: ObjectId,
-    ref: "Users",
-  },
-  Status: { type: String, default: "Pending" },
+  MsgType: { type: String, required: true },
   Date: { type: Date, default: Date.now },
 });
 
