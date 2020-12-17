@@ -246,6 +246,7 @@
   border: thin solid #1d103d;
   color: white;
   transition: all 500ms;
+  text-decoration: none;
 }
 
 .AccountSideBarDisconnectBtn:hover,

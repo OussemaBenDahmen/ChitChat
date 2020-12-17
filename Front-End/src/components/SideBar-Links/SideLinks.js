@@ -15,7 +15,16 @@ function SideLinks(props) {
   const FriendsList = useSelector((state) => state.FriendsList);
   const Rooms = useSelector((state) => state.Rooms);
   const dispatch = useDispatch();
-  // const [isOpen, setIsOpen] = useState(false);
+  const [RoomFilter, setRoomFilter] = useState("");
+  const [FriendFilter, setFriendFilter] = useState("");
+
+  const handleSearch = (e) => {
+    if (e.target.name == "RoomSearch") {
+      setRoomFilter(e.target.value.toLowerCase());
+    } else {
+      setFriendFilter(e.target.value.toLowerCase());
+    }
+  };
 
   useEffect(() => {
     dispatch(GetFriendListService(User._id));
@@ -46,18 +55,25 @@ function SideLinks(props) {
               Account
             </button>
             <button className="DropDownItem">Status</button>
-            <button
+            <Link
+              to="/SignIn"
               className="DropDownItem"
               onClick={() => dispatch(LogOutService(User))}
             >
               Disconnect
-            </button>
+            </Link>
           </DropDown>
         </div>
       </div>
       <div className="SideLinks-Section RoomSection">
         <h4 className="SectionTitle">Rooms</h4>
-        <input className="SearchInput" type="text" placeholder="# Search" />
+        <input
+          className="SearchInput"
+          type="text"
+          placeholder="# Search"
+          name="RoomSearch"
+          onChange={handleSearch}
+        />
         <div className="RoomLink">
           <Link className="SideBarRoomsLink" to="/Create_Room">
             <i className="fa fa-plus"></i> Create a Room
@@ -70,7 +86,9 @@ function SideLinks(props) {
           className="RoomListScrollBar"
         >
           <div className="RoomsList">
-            {Rooms.map((el, i) => (
+            {Rooms.filter((room) =>
+              room.RoomName.toLowerCase().includes(RoomFilter)
+            ).map((el, i) => (
               <li className="RoomLink" key={i}>
                 <Link
                   className="SideBarRoomsLink"
@@ -86,14 +104,22 @@ function SideLinks(props) {
       </div>
       <div className="SideLinks-Section FriendListSection">
         <h4 className="SectionTitle">Friends</h4>
-        <input className="SearchInput" type="text" placeholder="# Search" />
+        <input
+          className="SearchInput"
+          type="text"
+          placeholder="# Search"
+          name="FriendSearch"
+          onChange={handleSearch}
+        />
         <Scrollbars
           autoHeight
           autoHide
           hideTracksWhenNotNeeded
           className="FriendsListScrollBar"
         >
-          {FriendsList.map((el, i) => (
+          {FriendsList.filter((Friend) =>
+            Friend.UserName.toLowerCase().includes(FriendFilter)
+          ).map((el, i) => (
             <Link className="FriendListLink" to={`/Chat_id=${el._id}`} key={i}>
               <FriendListElement el={el} indx={i} />
             </Link>

@@ -14,21 +14,24 @@ export const UpdateProfileService = (data) => {
       )
       .catch((err) => {
         dispatch({ type: "EDIT_PROFILE_ERROR", payload: err });
+        alert(err.response.data);
       });
   };
 };
 
-export const DeleteProfileService = (data) => {
+export const DeleteProfileService = (id) => {
   return (dispatch) => {
     dispatch(DeleteAccount());
-    Axios.delete(`${ServerURI}/user/user_id=${data._id}`, {
+    Axios.delete(`${ServerURI}/Users/user_id=${id}`, {
       withCredentials: true,
     })
-      .then((res) =>
-        dispatch({ type: "DELETE_PROFILE_SUCCESS", payload: res.data })
-      )
+      .then((res) => {
+        localStorage.setItem("isLogged", "false");
+        dispatch({ type: "DELETE_PROFILE_SUCCESS", payload: res.data });
+      })
       .catch((err) => {
         dispatch({ type: "DELETE_PROFILE_ERROR", payload: err });
+        alert(err.response.data);
       });
   };
 };
@@ -36,7 +39,7 @@ export const DeleteProfileService = (data) => {
 export const GetProfileService = () => {
   return (dispatch) => {
     dispatch(GetAccount());
-    Axios.get(`${ServerURI}/users/getLogged`, {
+    Axios.get(`${ServerURI}/Users/getLogged`, {
       withCredentials: true,
     })
       .then((res) =>
@@ -44,6 +47,7 @@ export const GetProfileService = () => {
       )
       .catch((err) => {
         dispatch({ type: "GET_PROFILE_ERROR", payload: err });
+        alert(err.response.data);
       });
   };
 };
@@ -64,6 +68,7 @@ export const GetSingleUserConversation = ({ user_id, friend_id }) => {
       })
       .catch((err) => {
         dispatch({ type: "GET_CONVERSATION_ERROR", payload: err });
+        alert(err.response.data);
       });
   };
 };

@@ -17,6 +17,7 @@ export const GetFriendListService = (id) => {
       )
       .catch((err) => {
         dispatch({ type: "GET_FRIENDLIST_ERROR", payload: err });
+        alert(err.response.data);
       });
   };
 };

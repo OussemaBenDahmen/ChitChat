@@ -50,7 +50,7 @@ mongoose.connect(
 //Application middlewares
 app.post("/connect/login", Authentication.LogIn);
 app.post("/connect/logout", Authentication.LogOut);
-app.use("/users", userRoute);
+app.use("/Users", userRoute);
 app.use("/Upload", UploadRoute);
 app.use("/Rooms", roomRoutes);
 
