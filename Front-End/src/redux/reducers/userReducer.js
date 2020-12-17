@@ -12,6 +12,8 @@ const userReducer = (state = initialState, action) => {
       return { ...action.payload };
     case "DELETE_PROFILE_SUCCESS":
       return {};
+    case "LOGOUT_SUCCESS":
+      return {};
     default:
       return state;
   }

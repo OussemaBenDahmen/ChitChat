@@ -15,6 +15,8 @@ const roomReducer = (state = initialState, action) => {
       return state.filter((el) => el._id !== action.payload._id);
     case "DELETE_ROOM_SUCCESS":
       return state.filter((el) => el._id !== action.payload._id);
+    case "LOGOUT_SUCCESS":
+      return [];
     default:
       return state;
   }
