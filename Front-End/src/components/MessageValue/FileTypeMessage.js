@@ -10,7 +10,7 @@ import { ServerURI } from "../../services/config";
 
 function FileTypeMessage({ message }) {
   const extension = message.Value.match(/\.[a-z]+/gi)[0];
-  console.log(extension);
+
   switch (extension) {
     case ".pdf":
       return (

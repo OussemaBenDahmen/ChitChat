@@ -66,8 +66,6 @@ function MessageSectionFooter(props) {
         Conversation: props.Conversation,
       })
     );
-
-    console.log(Message);
   };
 
   return (
@@ -97,6 +95,12 @@ function MessageSectionFooter(props) {
         className="MessageInput"
         placeholder="Type your message here"
         onChange={handleChange}
+        onKeyPress={(e) => {
+          if (e.key == "Enter") {
+            SendMessage();
+            MessageInput.current.value = "";
+          }
+        }}
       />
       <button
         className="MessageInputsBtn"

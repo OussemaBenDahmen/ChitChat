@@ -18,15 +18,31 @@ export const UpdateProfileService = (data) => {
   };
 };
 
-export const DeleteProfileService = (data) => {
+export const UpdateStatusService = (id, data) => {
   return (dispatch) => {
-    dispatch(DeleteAccount());
-    Axios.delete(`${ServerURI}/user/user_id=${data._id}`, {
+    Axios.put(`${ServerURI}/users/status/user_id=${id}`, data, {
       withCredentials: true,
     })
       .then((res) =>
-        dispatch({ type: "DELETE_PROFILE_SUCCESS", payload: res.data })
+        dispatch({ type: "EDIT_PROFILE_SUCCESS", payload: res.data })
       )
+      .catch((err) => {
+        dispatch({ type: "EDIT_PROFILE_ERROR", payload: err });
+        alert(err.response.data);
+      });
+  };
+};
+
+export const DeleteProfileService = (id) => {
+  return (dispatch) => {
+    dispatch(DeleteAccount());
+    Axios.delete(`${ServerURI}/users/user_id=${id}`, {
+      withCredentials: true,
+    })
+      .then((res) => {
+        dispatch({ type: "DELETE_PROFILE_SUCCESS", payload: res.data });
+        localStorage.setItem("isLogged", "false");
+      })
       .catch((err) => {
         dispatch({ type: "DELETE_PROFILE_ERROR", payload: err });
       });
@@ -59,7 +75,6 @@ export const GetSingleUserConversation = ({ user_id, friend_id }) => {
       }
     )
       .then((res) => {
-        console.log(res.data);
         dispatch({ type: "GET_CONVERSATION_SUCCESS", payload: res.data });
       })
       .catch((err) => {

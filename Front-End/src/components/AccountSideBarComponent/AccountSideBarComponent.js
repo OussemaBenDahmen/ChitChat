@@ -2,18 +2,24 @@ import React, { useEffect, useRef, useState } from "react";
 import AccountSideBar from "../StyledComponents/AccountSideBar";
 import AccountSideBarBackDrop from "../StyledComponents/AcountSideBarBackdrop";
 import StatusSwitch from "../StyledComponents/StatusSwitch";
-import "../MessageSection/style.css";
 import { useDispatch } from "react-redux";
 import {
   DeleteProfileService,
   UpdateProfileService,
+  UpdateStatusService,
 } from "../../services/user";
 import { ServerURI } from "../../services/config";
 import { UploadImgService } from "../../services/fileUpload";
 import { LogOutService } from "../../services/auth/auth";
 import { Link } from "react-router-dom";
+
+import "./style.css";
+
 function AccountSideBarComponent(props) {
-  const [isOnline, setIsOnline] = useState(true);
+  const myStatus =
+    props.User.Status && props.User.Status == "Online" ? true : false;
+
+  const [isOnline, setIsOnline] = useState(myStatus);
   const [isEditing, setIsEditing] = useState(false);
   const [Profile, setProfile] = useState({ ...props.User });
 
@@ -21,7 +27,6 @@ function AccountSideBarComponent(props) {
   const handleChange = (e) => {
     Profile[e.target.name] = e.target.value;
     setProfile(props.User);
-    console.log(Profile);
   };
   const upload = (e) => {
     let Fd = new FormData();
@@ -31,6 +36,7 @@ function AccountSideBarComponent(props) {
   const UploadRef = useRef();
   useEffect(() => {
     setProfile(props.User);
+    setIsOnline(myStatus);
   }, [props.User]);
 
   return (
@@ -81,7 +87,14 @@ function AccountSideBarComponent(props) {
               <h5>Status </h5>
               <StatusSwitch
                 isOnline={isOnline}
-                onClick={() => setIsOnline(!isOnline)}
+                onClick={() => {
+                  dispatch(
+                    UpdateStatusService(props.User._id, {
+                      Status: isOnline === true ? "Offline" : "Online",
+                    })
+                  );
+                  setIsOnline(!isOnline);
+                }}
               >
                 <div className="SwitchButton"></div>
               </StatusSwitch>
@@ -124,7 +137,6 @@ function AccountSideBarComponent(props) {
                   <button
                     className="AccountSideBarSaveBtn"
                     onClick={() => {
-                      console.log(Profile);
                       dispatch(UpdateProfileService(Profile));
                       setIsEditing(false);
                     }}

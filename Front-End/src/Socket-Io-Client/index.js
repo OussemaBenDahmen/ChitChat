@@ -5,7 +5,6 @@ export const socket = socketIo(ServerURI, { withCredentials: true });
 
 export const SendMessageSocket = (payload) => {
   socket.emit("SendMessage", payload);
-  console.log("Message Sent");
 };
 
 export const SendGroupeMessage = (payload) => {

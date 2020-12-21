@@ -1,10 +1,10 @@
 import Axios from "axios";
 import { Login, Logout } from ".";
-
+// we ate teseting
 import { ServerURI } from "../../services/config";
 import { CreateAccount } from "../../redux/actions/User";
 
-export const LogInService = (data) => {
+export const LogInService = (data, history) => {
   return (dispatch) => {
     dispatch(Login());
     Axios.post(`${ServerURI}/connect/login`, data, {
@@ -14,6 +14,7 @@ export const LogInService = (data) => {
         localStorage.setItem("isLogged", true);
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
         dispatch({ type: "SIGNUP_SUCCESS", payload: res.data });
+        history.push("/");
       })
       .catch((err) => {
         dispatch({ type: "LOGIN_ERROR", payload: err });
@@ -39,7 +40,7 @@ export const LogOutService = (data) => {
   };
 };
 
-export const SignUpService = (data) => {
+export const SignUpService = (data, history) => {
   return (dispatch) => {
     dispatch(CreateAccount());
     Axios.post(`${ServerURI}/users/signup`, data, {
@@ -49,6 +50,7 @@ export const SignUpService = (data) => {
         localStorage.setItem("isLogged", true);
         dispatch({ type: "SIGNUP_SUCCESS", payload: res.data });
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+        history.push("/");
       })
       .catch((err) => {
         dispatch({ type: "SIGNUP_ERROR", payload: err });

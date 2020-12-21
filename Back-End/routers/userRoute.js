@@ -13,6 +13,8 @@ router.get("/getLogged", userController.getLogged);
 
 router.put("/user_id=:id", userController.edit);
 
+router.put("/status/user_id=:id", userController.StatusUpdate);
+
 router.delete("/user_id=:id", userController.delete);
 
 module.exports = router;

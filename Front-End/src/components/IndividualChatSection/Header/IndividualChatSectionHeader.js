@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import DropDown from "../../StyledComponents/DropdownDiv";
 
 function IndividualChatSectionHeader(props) {
   return (

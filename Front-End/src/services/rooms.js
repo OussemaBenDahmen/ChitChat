@@ -44,7 +44,6 @@ export const GetSingleRoomService = (id) => {
       withCredentials: true,
     })
       .then((res) => {
-        console.log(res.data);
         dispatch({ type: "GET_CONVERSATION_SUCCESS", payload: res.data });
       })
       .catch((err) => {

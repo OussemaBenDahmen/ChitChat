@@ -5,7 +5,8 @@ import {
   GetSingleRoomService,
   LeaveRoomService,
 } from "../../../services/rooms";
-import DropDown from "../../StyledComponents/DropdownDiv";
+import ChatSectionCollapsable from "../../StyledComponents/chatSectionCollapsable";
+import "../style.css";
 
 function MessageSectionHeader(props) {
   const dispatch = useDispatch();
@@ -17,13 +18,7 @@ function MessageSectionHeader(props) {
     <header className="MessageSectionHeader">
       <h2 className="RoomName-FriendName"># {props.el.RoomName}</h2>
       <div className="DropDown">
-        <button
-          className="MessageSectionHeaderDropDownBtn"
-          onClick={() => props.setIsDropDownOpen(!props.isDropDownOpen)}
-        >
-          <i className="fa fa-ellipsis-v"></i>
-        </button>
-        <DropDown isOpen={props.isDropDownOpen}>
+        <ChatSectionCollapsable isOpen={props.isDropDownOpen}>
           {props.el.RoomCreator._id === props.User._id ? (
             <Link
               room={props.el}
@@ -48,7 +43,13 @@ function MessageSectionHeader(props) {
               Leave Room
             </button>
           )}
-        </DropDown>
+        </ChatSectionCollapsable>
+        <button
+          className="MessageSectionHeaderDropDownBtn"
+          onClick={() => props.setIsDropDownOpen(!props.isDropDownOpen)}
+        >
+          <i className="fa fa-ellipsis-v "></i>
+        </button>
       </div>
     </header>
   );

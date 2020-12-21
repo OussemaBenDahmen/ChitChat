@@ -3,9 +3,6 @@ const jwt = require("jsonwebtoken");
 const PassHash = require("../helpers/PasswordHasher");
 const ConversationModel = require("../models/Conversation");
 module.exports = {
-  // get: (req, res) => {
-  //   UserModel.findOne({ _id: req.params.id }, (err, data) => res.json(data));
-  // },
   getAll: (req, res) => {
     UserModel.find({}, (err, data) => {
       if (err) throw err;
@@ -18,6 +15,7 @@ module.exports = {
     Profile.UserName = Profile.UserName.toLowerCase();
     PassHash.hashPass(Profile.Password).then((hash) => {
       Profile.Password = hash;
+      Profile.Status = "Online";
       let newUser = new UserModel(Profile);
       UserModel.find()
         .populate()
@@ -61,20 +59,30 @@ module.exports = {
       })
       .catch(() => res.status(500).send("something is wrong"));
   },
+
+  StatusUpdate: (req, res) => {
+    UserModel.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $set: { Status: req.body.Status } },
+      { new: true }
+    )
+      .then((data) => (err, data) => {
+        res.json(data);
+      })
+      .catch((err) => res.status(500).send("something is wrong"));
+  },
   delete: (req, res) => {
-    UserModel.findByIdAndDelete({ _id: req.params.id }).then((data) =>
-      res
-        .json(data)
-        .catch((err) =>
-          res.status(500).send("Can't delete User, try again later")
-        )
-    );
+    UserModel.findByIdAndDelete({ _id: req.params.id })
+      .then((data) => res.json(data))
+      .catch((err) =>
+        res.status(500).send("Can't delete User, try again later")
+      );
   },
   getLogged: (req, res) => {
     let mytoken = req.cookies.token;
-    console.log(mytoken);
+
     let decoded = jwt.verify(mytoken, process.env.SECRET_KEY);
-    console.log(decoded);
+
     UserModel.findById({
       _id: decoded._doc ? decoded._doc._id : decoded._id,
     }).then((data) => {
