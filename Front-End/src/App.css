@@ -17,3 +17,9 @@ button {
   cursor: pointer;
   outline: none;
 }
+
+@media only screen and (max-height: 600px) {
+  .App {
+    overflow: scroll;
+  }
+}

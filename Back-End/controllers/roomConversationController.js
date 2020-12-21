@@ -9,7 +9,6 @@ module.exports = {
         populate: { path: "SenderId" },
       })
       .then((Rooms) => {
-        console.log(Rooms[0]);
         res.json(Rooms[0]);
       })
       .catch((err) => console.log(err));

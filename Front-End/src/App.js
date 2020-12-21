@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { socket } from "./Socket-Io-Client";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import "./App.css";
 import RoomCreation from "./components/RoomSection/RoomCreation";
 import MessageSection from "./components/MessageSection/MessageSection";
@@ -61,6 +66,7 @@ function App() {
             isAccountSectionOpen={isAccountSectionOpen}
             setAccountSectionOpen={setAccountSectionOpen}
           />
+          {isLogged ? <Redirect to="/" /> : null}
 
           <Switch>
             <Route path="/Create_Room">
@@ -91,7 +97,7 @@ function App() {
                 />
               </Route>
             ))}
-            <Route path="/">
+            <Route exact path="/">
               <Welcome
                 User={User}
                 isLogged={isLogged}

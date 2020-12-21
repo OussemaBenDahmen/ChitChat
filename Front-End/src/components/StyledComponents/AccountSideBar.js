@@ -9,12 +9,13 @@ const AccountSideBar = styled.div`
   justify-content: flex-end;
   align-items: center;
   transition: all 500ms;
-  background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPG69i_M4RUj0GeJZxdtYJHBBVCk34yUkfwQ&usqp=CAU")
-    no-repeat;
-  background-size: cover;
+  background: white;
   height: 100vh;
   width: ${(props) => (props.isOpen ? "300px" : "0px")};
   visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};
+  @media only screen and (max-width: 600px) {
+    width: ${(props) => (props.isOpen ? "100vw" : "0")};
+  }
 `;
 
 export default AccountSideBar;

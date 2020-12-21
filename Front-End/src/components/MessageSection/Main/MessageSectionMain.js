@@ -8,7 +8,7 @@ function MessageSectionMain(props) {
   const BottomDiv = useRef();
   useEffect(() => {
     BottomDiv.current.scrollIntoView(false);
-  }, [props]);
+  }, [props.Conversation.Messages]);
   return (
     <main className="MessageSectionMain">
       <Scrollbars autoHide hideTracksWhenNotNeeded>
@@ -19,6 +19,7 @@ function MessageSectionMain(props) {
               src={`${ServerURI}/${el.SenderId.picture}`}
               alt="UserImage"
             />
+
             <div className="MessageElementContent">
               <div className="MessageSenderNameAndDate">
                 <h4 className="MessageSenderName">{el.SenderId.UserName}</h4>
