@@ -2,3 +2,13 @@ audio,
 video {
   outline: none;
 }
+
+.MediaDisplay {
+  width: 300px;
+}
+
+@media only screen and (max-width: 600px) and (orientation: portrait) {
+  .MediaDisplay {
+    width: 80%;
+  }
+}

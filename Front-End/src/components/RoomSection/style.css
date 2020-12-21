@@ -2,6 +2,7 @@
   width: 100%;
   padding: 20px;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   border-bottom: thin solid rgba(128, 128, 128, 0.385);
@@ -35,8 +36,8 @@
 .CreateRoomBtn {
   width: 100px;
   height: 40px;
-  background-color: #1d103d;
-  border: thin solid #1d103d;
+  background-color: #438ff2;
+  border: thin solid #438ff2;
   color: white;
   transition: all 500ms;
 }
@@ -44,9 +45,9 @@
 .CancelBtn {
   width: 100px;
   height: 40px;
-  background-color: #3f0c24;
-  border: thin solid#2F1320;
-  color: white;
+  background-color: white;
+  border: 2px solid#110820;
+  color: #110820;
   transition: all 500ms;
 }
 
@@ -54,15 +55,31 @@
   width: 150px;
   height: 60px;
   margin-bottom: 20px;
-  background-color: #5e0808;
-  border: thin solid#2f1313;
-  color: white;
+  background-color: white;
+  border: 2px solid#e11c1c;
+  color: #e11c1c;
   transition: all 500ms;
 }
 
-.CreateRoomBtn:hover,
-.CancelBtn:hover,
-.DeleteBtn:hover {
+.CreateRoomBtn:hover {
   filter: brightness(0.8) invert(1);
-  border: thin solid white;
+}
+
+.CancelBtn:hover {
+  background-color: #110820;
+  border: 2px solid white;
+  color: white;
+}
+
+.DeleteBtn:hover {
+  color: white;
+  background-color: #ed0d0d;
+  border: 2px solid white;
+}
+
+@media only screen and (max-width: 600px) {
+  .RoomSpaceHeader {
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
 }

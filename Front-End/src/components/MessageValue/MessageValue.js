@@ -24,12 +24,28 @@ function MessageValue({ message }) {
       return <div className="MessageTxt">{splits}</div>;
 
     case "image":
-      return <img src={`${ServerURI}/${message.Value}`} alt="" width="300px" />;
+      return (
+        <img
+          src={`${ServerURI}/${message.Value}`}
+          alt=""
+          className="MediaDisplay"
+        />
+      );
     case "audio":
-      return <audio src={`${ServerURI}/${message.Value}`} controls />;
+      return (
+        <audio
+          src={`${ServerURI}/${message.Value}`}
+          controls
+          className="MediaDisplay"
+        />
+      );
     case "video":
       return (
-        <video src={`${ServerURI}/${message.Value}`} controls width="300" />
+        <video
+          src={`${ServerURI}/${message.Value}`}
+          controls
+          className="MediaDisplay"
+        />
       );
 
     case "file":

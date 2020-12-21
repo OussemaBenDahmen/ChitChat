@@ -11,7 +11,6 @@ router.post(
 
 router.post("/file", Upload.single("MsgFile"), (req, res) => {
   res.json({ msg: "done" });
-  console.log("done");
 });
 
 module.exports = router;

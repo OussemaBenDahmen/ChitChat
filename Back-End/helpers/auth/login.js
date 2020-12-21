@@ -11,7 +11,6 @@ module.exports = Authentication = {
         res.status(500).send("User not found in dataBase");
         console.log("notfound");
       } else {
-        console.log(data);
         const match = await PassHash.comparePass(
           req.body.Password,
           data[0].Password
@@ -36,7 +35,6 @@ module.exports = Authentication = {
     });
   },
   LogOut: (req, res) => {
-    console.log(req.body);
     UserModel.findByIdAndUpdate(
       { _id: req.body._id },
       { $set: { Status: "Offline" } },

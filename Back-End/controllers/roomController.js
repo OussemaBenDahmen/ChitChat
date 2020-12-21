@@ -33,7 +33,6 @@ module.exports = {
         RoomModel.findById({ _id: data._id })
           .populate("RoomCreator UsersList")
           .then((data) => {
-            console.log(data);
             res.json(data);
           })
           .catch((err) => {
@@ -57,7 +56,6 @@ module.exports = {
         )
           .populate("RoomCreator UsersList")
           .then((data) => {
-            console.log(data);
             res.status(200).json(data);
           });
       })
