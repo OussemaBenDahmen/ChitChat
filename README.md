@@ -16,13 +16,19 @@ First clone the repo into your local machine
 
 next you need to open the folder in either your IDE or in Termina/CMD
 
-and run npm install.
+and run 
+
+'''
+npm install.
+'''
 
 Second you will be having two main folders Front-End and Back-End
 
 open each folder in your IDE or Terminal/CMD and run:
 
+'''
 npm install
+'''
 
 After running npm install in the ChitChat folder, Front-End folder and Back-End folder you should be all set. 
 
@@ -35,7 +41,7 @@ You can run the application in two ways:
 ### Methode 1
 
  - Open ChitChat folder in your IDE or Termina/CMD.
- - Run npm start in CLI
+ - Run **npm start** in CLI
 
 the application should start and you will be all set to use it.
 
@@ -43,7 +49,7 @@ the application should start and you will be all set to use it.
 
 You can run client-side and server-side separately: 
  - Open each folder (Front-End and Back-End) in the IDE or Terminal/CMD (each folder on it's own)
- - Run npm start in each CLI
+ - Run **npm start** in each CLI
 Now each Folder will run on it's own 
 
 
