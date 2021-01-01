@@ -2,8 +2,6 @@ const ConversationModel = require("../models/Conversation");
 
 module.exports = {
   GetConversation: (req, res) => {
-    console.log(req.body);
-    console.log("MyID", req.params.id);
     ConversationModel.find({
       $and: [
         { Users: { $in: [req.params.id] } },

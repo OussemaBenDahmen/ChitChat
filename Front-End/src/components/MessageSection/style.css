@@ -1,5 +1,4 @@
 .MessageSectionHeader {
-  position: relative;
   width: 100%;
   min-height: 10%;
   padding: 15px;
@@ -8,6 +7,10 @@
   justify-content: space-between;
   align-items: center;
 }
+.DropDown {
+  display: flex;
+}
+
 .MessageSectionHeaderDropDownBtn {
   background: none;
   border: none;
@@ -30,14 +33,13 @@
   width: 100%;
   height: 30%;
   padding-left: 15px;
-  line-height: 2rem;
+  line-height: 1rem;
   color: black;
   text-decoration: none;
   transition: all 1s;
 }
 .MessageSectionDropDownContent:hover {
-  background: rgba(255, 255, 255, 0.248);
-  color: white;
+  text-shadow: 5px 5px 5px;
 }
 
 .MessageSectionMain {
@@ -105,151 +107,15 @@
 .MessageInput::-webkit-scrollbar {
   display: none;
 }
-/*************************************************/
-.AccountSideBarContent {
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(10px) brightness(0.9);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-}
 
-.AccountSideBarCloseBtn {
-  position: absolute;
-  z-index: 1315;
-  top: 0;
-  left: 0;
-  background: none;
-  outline: none;
-  border: none;
-  color: #1c0a20;
-  font-size: x-large;
-  transition: all 500ms;
-  cursor: pointer;
-}
-.AccountSideBarCloseBtn:hover {
-  color: white;
-  background-color: #42184b;
-  backdrop-filter: blur(100px);
-}
-
-.AccountSideBarProfilePic {
-  z-index: -1;
-  width: 100%;
-  max-height: 300px;
-  position: absolute;
-  top: 0;
-}
-
-.AccountSideBarStatusAndUploadImg {
-  position: absolute;
-  top: 40%;
-  width: 100%;
-  padding: 0 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgba(128, 128, 128, 0.2);
-}
-
-.UploadFile {
-  background: none;
-  border: none;
-  outline: none;
-  transition: all 500ms;
-  cursor: pointer;
-  color: #1c0a20;
-  font-size: x-large;
-}
-.UploadFile:hover {
-  color: white;
-  background-color: #42184b;
-  backdrop-filter: blur(100px);
-}
-.AccountSideBarStatus {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.SwitchButton {
-  width: 15px;
-  height: 15px;
-  border: thin solid gray;
-  border-radius: 100%;
-  background-color: white;
-}
-
-.AccountInformation {
-  height: 50%;
-  width: 100%;
-  position: absolute;
-  left: 20px;
-  bottom: 0;
-}
-
-.AccountInformationEditBtn {
-  position: absolute;
-  right: 30px;
-  font-size: x-large;
-  border: none;
-  background: none;
-  outline: none;
-  cursor: pointer;
-  transition: all 500ms;
-}
-.AccountInformationEditBtn:hover {
-  color: #42184b;
-}
-
-.EditInput {
-  font-size: 1rem;
-  font-weight: bolder;
-  height: 1.5rem;
-  margin: 10px;
-  outline: none;
-  background: none;
-  border: none;
-  border-bottom: thin solid #42184b;
-  transition: all 500ms;
-}
-.EditInput:hover {
-  color: white;
-  background: #42184b77;
-}
-
-.AccountSideBarSaveBtn {
-  width: 100px;
-  height: 40px;
-  font-size: x-large;
-  background-color: #1d103d;
-  border: thin solid #1d103d;
-  color: white;
-  transition: all 500ms;
-}
-.AccountSideBarDeleteBtn {
-  width: 100px;
-  height: 40px;
-  font-size: x-large;
-  background-color: #3f0c24;
-  border: thin solid#2F1320;
-  color: white;
-  transition: all 500ms;
-}
-.AccountSideBarDisconnectBtn {
-  position: absolute;
-  bottom: 20px;
-  width: 100px;
-  height: 40px;
-  background-color: #1d103d;
-  border: thin solid #1d103d;
-  color: white;
-  transition: all 500ms;
-}
-
-.AccountSideBarDisconnectBtn:hover,
-.AccountSideBarSaveBtn:hover,
-.AccountSideBarDeleteBtn:hover {
-  filter: brightness(0.8) invert(1);
+@media only screen and (max-width: 600px) and (orientation: portrait) {
+  .MessageSectionMain {
+    width: 50%;
+  }
+  .MessageElementImage {
+    width: 20%;
+  }
+  .MessageElementImage {
+    display: none;
+  }
 }

@@ -9,7 +9,7 @@ function SignUpAndSignIn() {
       <Route exact path="/">
         <SignUp />
       </Route>
-      <Route path="/SignIn">
+      <Route exact path="/SignIn">
         <SignIn />
       </Route>
     </Switch>

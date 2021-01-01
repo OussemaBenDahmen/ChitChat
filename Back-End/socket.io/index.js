@@ -22,7 +22,6 @@ module.exports = function (Server) {
 
     socket.on("SendMessage", (data) => {
       if (data.destination == "room") {
-        console.log(data);
         let newMsg = new MsgModel(data.Message);
         newMsg.save().then((Msg) => {
           RoomConversationModel.findByIdAndUpdate(
@@ -36,8 +35,6 @@ module.exports = function (Server) {
             });
         });
       } else {
-        console.log(data);
-
         let newMsg = new MsgModel(data.Message);
         newMsg.save().then((Msg) => {
           ConversationModel.findByIdAndUpdate(
@@ -53,7 +50,7 @@ module.exports = function (Server) {
       }
     });
 
-    socket.on("disconnect", () => {
+    socket.on("disconnect", (socket) => {
       io.emit("Log-notification", { msg: "Someone disconnected" });
     });
   });

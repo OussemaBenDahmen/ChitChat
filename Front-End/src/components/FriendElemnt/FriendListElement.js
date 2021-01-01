@@ -1,5 +1,6 @@
 import React from "react";
 import { ServerURI } from "../../services/config";
+import "../SideBar-Links/style.css";
 
 function FriendListElement(props) {
   return (
@@ -14,7 +15,8 @@ function FriendListElement(props) {
         src={ServerURI + "/" + props.el.picture}
         alt="Friend"
       />
-      <h4>{props.el.UserName}</h4>
+
+      <h4 className="UserName">{props.el.UserName}</h4>
     </div>
   );
 }

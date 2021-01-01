@@ -4,27 +4,44 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { LogOutService } from "../../services/auth/auth";
 import FriendListElement from "../FriendElemnt/FriendListElement";
-import DropDown from "../StyledComponents/DropdownDiv";
 import { GetFriendListService } from "../../services/friendsList";
 
 import "./style.css";
 import { GetMyRoomsService } from "../../services/rooms";
+import SideBarCollapsable from "../StyledComponents/sideBarCollapable";
+import { ServerURI } from "../../services/config";
 
 function SideLinks(props) {
   const User = useSelector((state) => state.User);
   const FriendsList = useSelector((state) => state.FriendsList);
   const Rooms = useSelector((state) => state.Rooms);
   const dispatch = useDispatch();
-  // const [isOpen, setIsOpen] = useState(false);
+
+  const [RoomFilter, setRoomFilter] = useState("");
+  const [UserFilter, setUserFilter] = useState("");
+
+  const [myViewPortWidth, setMyViewPortWidth] = useState(
+    window.visualViewport.width
+  );
+
+  useEffect(() => {
+    setMyViewPortWidth(window.visualViewport.width);
+  }, []);
 
   useEffect(() => {
     dispatch(GetFriendListService(User._id));
     dispatch(GetMyRoomsService(User));
-  }, [dispatch]);
+  }, [dispatch, User]);
   return (
     <div className="SideLinksContainer">
       <div className="SideLinks-Section UserSection">
-        <h2 className="UserNameDisplay">TestUser</h2>
+        <img
+          src={`${ServerURI}/${User.picture}`}
+          alt="profilePic"
+          className="UserImage"
+        />
+        <h2 className="UserNameDisplay">{User.UserName}</h2>
+
         <div className="DropDownContainer">
           <button
             className="SideBarUserSectionGearBtn"
@@ -34,8 +51,7 @@ function SideLinks(props) {
           >
             <i className="fa fa-cog gear"></i>
           </button>
-
-          <DropDown isOpen={props.isOpen}>
+          <SideBarCollapsable isOpen={props.isOpen}>
             <button
               className="DropDownItem"
               onClick={() => {
@@ -45,22 +61,27 @@ function SideLinks(props) {
             >
               Account
             </button>
-            <button className="DropDownItem">Status</button>
             <button
               className="DropDownItem"
               onClick={() => dispatch(LogOutService(User))}
             >
               Disconnect
             </button>
-          </DropDown>
+          </SideBarCollapsable>
         </div>
       </div>
       <div className="SideLinks-Section RoomSection">
         <h4 className="SectionTitle">Rooms</h4>
-        <input className="SearchInput" type="text" placeholder="# Search" />
+        <input
+          className="SearchInput"
+          type="text"
+          placeholder="# Search"
+          onChange={(e) => setRoomFilter(e.target.value.toLowerCase())}
+        />
         <div className="RoomLink">
           <Link className="SideBarRoomsLink" to="/Create_Room">
-            <i className="fa fa-plus"></i> Create a Room
+            <i className="fa fa-plus"></i>{" "}
+            <h3 className="CreateRoomLink">Create a Room</h3>
           </Link>
         </div>
         <Scrollbars
@@ -70,7 +91,9 @@ function SideLinks(props) {
           className="RoomListScrollBar"
         >
           <div className="RoomsList">
-            {Rooms.map((el, i) => (
+            {Rooms.filter((room) =>
+              room.RoomName.toLowerCase().includes(RoomFilter)
+            ).map((el, i) => (
               <li className="RoomLink" key={i}>
                 <Link
                   className="SideBarRoomsLink"
@@ -86,18 +109,33 @@ function SideLinks(props) {
       </div>
       <div className="SideLinks-Section FriendListSection">
         <h4 className="SectionTitle">Friends</h4>
-        <input className="SearchInput" type="text" placeholder="# Search" />
+        <input
+          className="SearchInput"
+          type="text"
+          placeholder="# Search"
+          onChange={(e) => setUserFilter(e.target.value.toLowerCase())}
+        />
         <Scrollbars
           autoHeight
           autoHide
           hideTracksWhenNotNeeded
           className="FriendsListScrollBar"
         >
-          {FriendsList.map((el, i) => (
-            <Link className="FriendListLink" to={`/Chat_id=${el._id}`} key={i}>
-              <FriendListElement el={el} indx={i} />
-            </Link>
-          ))}
+          {FriendsList.filter((user) => user.UserName.includes(UserFilter)).map(
+            (el, i) => (
+              <Link
+                className="FriendListLink"
+                to={`/Chat_id=${el._id}`}
+                key={i}
+              >
+                <FriendListElement
+                  el={el}
+                  indx={i}
+                  myViewPortWidth={myViewPortWidth}
+                />
+              </Link>
+            )
+          )}
         </Scrollbars>
       </div>
     </div>

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { SignUpService } from "../../services/auth/auth";
 import "./style.css";
 
 function SignUp() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [Profile, setProfile] = useState({
     UserName: "",
     Email: "",
@@ -16,6 +18,13 @@ function SignUp() {
   };
   return (
     <div className="AuthForm">
+      <h2 className="FormTitle">Create an account</h2>
+      <p className="FormParagraph">
+        already have an account ? click{" "}
+        <a className="FormLink" href="/SignIn">
+          here
+        </a>
+      </p>
       <input
         className="FormInput"
         type="text"
@@ -46,19 +55,12 @@ function SignUp() {
           className="FromBtn Submit"
           onClick={(e) => {
             e.preventDefault();
-            dispatch(SignUpService(Profile));
+            dispatch(SignUpService(Profile, history));
           }}
         >
           Sign Up
         </button>
-        <button className="FromBtn Cancel">Cancel</button>
       </div>
-      <p className="FormParagraph">
-        already have an account ? click{" "}
-        <a className="FormLink" href="/SignIn">
-          here
-        </a>
-      </p>
     </div>
   );
 }

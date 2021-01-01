@@ -10,6 +10,17 @@ const Div = styled.div`
   flex-direction: column;
   align-items: center;
   transition: all 1s ease-in-out;
+
+  @media only screen and (max-width: 700px) and (orientation: portrait) {
+    width: ${(props) => (!props.isLogged ? "100vw" : "100px")};
+    min-width: 100px;
+  }
+
+  @media only screen and (max-width: 700px) and (orientation: landscape) {
+    width: ${(props) => (!props.isLogged ? "100vw" : "200px")};
+    height: auto;
+    min-width: 100px;
+  }
 `;
 
 export default Div;
