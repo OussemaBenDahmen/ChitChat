@@ -13,33 +13,34 @@ module.exports = {
   create: (req, res) => {
     const Profile = { ...req.body };
     Profile.UserName = Profile.UserName.toLowerCase();
-    PassHash.hashPass(Profile.Password).then((hash) => {
-      Profile.Password = hash;
-      Profile.Status = "Online";
-      let newUser = new UserModel(Profile);
-      UserModel.find()
-        .populate()
-        .then((Users) => {
-          Users.map((el) => {
-            let newConversation = new ConversationModel({
-              Users: [el, newUser],
+    PassHash.hashPass(Profile.Password)
+      .then((hash) => {
+        Profile.Password = hash;
+        Profile.Status = "Online";
+        let newUser = new UserModel(Profile);
+        UserModel.find()
+          .populate()
+          .then((Users) => {
+            Users.map((el) => {
+              let newConversation = new ConversationModel({
+                Users: [el, newUser],
+              });
+              newConversation.save();
             });
-            newConversation.save();
           });
-        });
-      newUser
-        .save()
-        .then(() => {
-          const token = jwt.sign({ ...newUser }, process.env.SECRET_KEY);
-          res.cookie("token", token, { httpOnly: "true" });
-          res.json(newUser);
-        })
-        .catch((error) => {
-          console.log(error.message);
-          res.status(500).send(error.message.substring(0, 6));
-        })
-        .catch(() => res.status(500).send("something is wrong"));
-    });
+        newUser
+          .save()
+          .then(() => {
+            const token = jwt.sign({ ...newUser }, process.env.SECRET_KEY);
+            res.cookie("token", token, { httpOnly: "true" });
+            res.json(newUser);
+          })
+          .catch((error) => {
+            console.log(error.message);
+            res.status(500).send(error.message.substring(0, 6));
+          });
+      })
+      .catch(() => res.status(500).send("something is wrong"));
   },
   edit: (req, res) => {
     let updateProfile = req.body;
