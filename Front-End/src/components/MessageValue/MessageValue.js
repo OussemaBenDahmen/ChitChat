@@ -11,12 +11,16 @@ function MessageValue({ message }) {
       splits = splits.map((el) => {
         if (el.includes("www.")) {
           el = (
-            <a href={`http://${el}`} target="_blank" rel="noopener noreferrer">
+            <a
+              href={el.includes("http") ? el : `http://${el}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {" " + el + " "}
             </a>
           );
         } else {
-          el = el;
+          el = el + " ";
         }
         return el;
       });
