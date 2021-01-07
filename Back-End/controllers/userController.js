@@ -27,17 +27,17 @@ module.exports = {
               });
               newConversation.save();
             });
-          });
-        newUser
-          .save()
-          .then(() => {
-            const token = jwt.sign({ ...newUser }, process.env.SECRET_KEY);
-            res.cookie("token", token, { httpOnly: "true" });
-            res.json(newUser);
-          })
-          .catch((error) => {
-            console.log(error.message);
-            res.status(500).send(error.message.substring(0, 6));
+            newUser
+              .save()
+              .then(() => {
+                const token = jwt.sign({ ...newUser }, process.env.SECRET_KEY);
+                res.cookie("token", token, { httpOnly: "true" });
+                res.json(newUser);
+              })
+              .catch((error) => {
+                console.log(error.message);
+                res.status(500).send(error.message.substring(0, 6));
+              });
           });
       })
       .catch(() => res.status(500).send("something is wrong"));
