@@ -28,6 +28,11 @@ open each folder in your IDE or Terminal/CMD and run:
 
 After running npm install in the ChitChat folder, Front-End folder and Back-End folder you should be all set.
 
+
+**You may run into some vulnerabilities after installing all the packages.**
+Run **npm audit fix** wherever you find such vulnerabilities.
+
+
 ### Running the App
 
 You can run the application in two ways:
