@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const os = require("os");
 const Authentication = require("./helpers/auth/login");
 const userRoute = require("./routers/userRoute");
 const UploadRoute = require("./routers/fileUploadRoute");
@@ -16,19 +15,10 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.static("Public"));
-const myIpAdress = os.networkInterfaces()["Wi-Fi"][1].address; //getting the PC's or Phone's Ip address
-let AllowedDomains = ["localhost", `${myIpAdress}`];
-const whitelist = AllowedDomains.map((domain) => `http://${domain}:3000`);
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (whitelist.indexOf(origin) !== -1 || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: "http://localhost:3000",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
@@ -55,10 +45,8 @@ app.use("/Upload", UploadRoute);
 app.use("/Rooms", roomRoutes);
 
 /**************************/
-const server = app.listen(
-  process.env.PORT || 5000,
-  ["*", ...AllowedDomains],
-  () => console.log(`Server Running on : http://localhost:${process.env.PORT}`)
+const server = app.listen(process.env.PORT || 5000, ["*"], () =>
+  console.log(`Server Running on : http://localhost:${process.env.PORT}`)
 );
 
 const io = Socket(server);
